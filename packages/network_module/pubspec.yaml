@@ -1,5 +1,6 @@
 name: network_module
 description: Network and API handling module using Dio.
+publish_to: 'none'
 version: 0.0.1
 publish_to: none
 

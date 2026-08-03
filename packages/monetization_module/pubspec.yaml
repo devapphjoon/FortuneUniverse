@@ -1,5 +1,6 @@
 name: monetization_module
 description: A new Flutter package for AdMob and In-App Purchases.
+publish_to: 'none'
 version: 0.0.1
 publish_to: none
 

@@ -44,6 +44,7 @@ Future<void> rateApp(BuildContext context, String packageName) async {
 
 Future<void> shareApp(BuildContext context, String packageName) async {
   final String shareText = "이 앱을 추천합니다! https://play.google.com/store/apps/details?id=$packageName";
+  // ignore: deprecated_member_use
   await Share.share(shareText);
 }
 

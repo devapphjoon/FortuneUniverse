@@ -1,5 +1,6 @@
 name: auth_module
 description: Authentication and Social Login UI module.
+publish_to: 'none'
 version: 0.0.1
 publish_to: none
 

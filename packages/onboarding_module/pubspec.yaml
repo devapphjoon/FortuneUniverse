@@ -1,5 +1,6 @@
 name: onboarding_module
 description: Onboarding and tutorial screens module.
+publish_to: 'none'
 version: 0.0.1
 publish_to: none
 

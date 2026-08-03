@@ -19,7 +19,7 @@ class ErrorInterceptor extends Interceptor {
         } else if (statusCode == 500) {
           errorMessage = "network_error_500".tr;
         } else {
-          errorMessage = "network_error_server".tr + " ($statusCode)";
+          errorMessage = '${"network_error_server".tr} ($statusCode)';
         }
         break;
       case DioExceptionType.connectionError:

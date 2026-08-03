@@ -11,14 +11,15 @@ class NoticeManager {
     await Future.delayed(const Duration(seconds: 1));
 
     // 더미 서버 응답
-    final bool hasNotice = true;
+    const bool hasNotice = true;
     final String noticeTitle = "notice_update_title".tr;
     final String noticeContent = "notice_update_content".tr;
-    final bool isForceUpdate = false; // 강제 업데이트 여부 (true면 스토어로 유도)
-    final String storeUrl = "https://play.google.com/store/apps/details?id=com.hjoon.app";
+    const bool isForceUpdate = false; // 강제 업데이트 여부 (true면 스토어로 유도)
+    const String storeUrl = "https://play.google.com/store/apps/details?id=com.hjoon.app";
 
     if (!context.mounted) return;
 
+    // ignore: dead_code
     if (isForceUpdate) {
       Get.dialog(
         ForceUpdateDialog(

@@ -1,5 +1,6 @@
 name: notice_module
 description: A new Flutter package for notice and force update popups.
+publish_to: 'none'
 version: 0.0.1
 publish_to: none
 

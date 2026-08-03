@@ -1,5 +1,6 @@
 name: permission_module
 description: Permission request and rationale module.
+publish_to: 'none'
 version: 0.0.1
 publish_to: none
 

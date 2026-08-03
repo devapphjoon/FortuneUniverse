@@ -7,6 +7,7 @@ import 'package:notice_module/notice_module.dart';
 import 'package:monetization_module/monetization_module.dart';
 import 'core/config/app_config.dart';
 import 'core/translations/app_translations.dart';
+import 'package:auth_module/auth_module.dart';
 import 'root_screen.dart';
 
 void main() async {
@@ -276,7 +277,7 @@ class _MainScreenState extends State<MainScreen> {
         
         const SizedBox(height: 40),
 
-        Text('계정 관리', style: AppTypography.heading2),
+        const Text('계정 관리', style: AppTypography.heading2),
         const SizedBox(height: 16),
         ElevatedButton(
           style: ElevatedButton.styleFrom(

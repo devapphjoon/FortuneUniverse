@@ -8,13 +8,13 @@ class AppScaffold extends StatefulWidget {
   final String title;
 
   const AppScaffold({
-    Key? key,
+    super.key,
     required this.pages,
     this.navItems,
     this.drawer,
     this.showBottomNav = true,
     required this.title,
-  }) : super(key: key);
+  });
 
   @override
   State<AppScaffold> createState() => _AppScaffoldState();

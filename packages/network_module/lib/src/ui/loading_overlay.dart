@@ -9,9 +9,9 @@ class LoadingOverlay {
     _isShowing = true;
     
     Get.dialog(
-      PopScope(
+      const PopScope(
         canPop: false, // 로딩 중에는 뒤로가기 버튼 무시
-        child: const Center(
+        child: Center(
           child: CircularProgressIndicator(),
         ),
       ),
