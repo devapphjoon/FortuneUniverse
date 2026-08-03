@@ -1,0 +1,12 @@
+{
+  "appName": "App Factory Boilerplate",
+  "apiBaseUrl": "https://api.appfactory.com",
+  "theme": {
+    "primaryColor": "#6200EE",
+    "isDarkMode": false
+  },
+  "features": {
+    "enableNotifications": true,
+    "enablePayments": false
+  }
+}
