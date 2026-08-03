@@ -36,6 +36,8 @@ dependencies:
   cupertino_icons: ^1.0.8
   get: ^4.7.3
   firebase_core: ^4.12.1
+  ui_module:
+    path: packages/ui_module
 
 dev_dependencies:
   flutter_test:
