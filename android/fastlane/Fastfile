@@ -1,0 +1,25 @@
+default_platform(:android)
+
+platform :android do
+  desc "구글 플레이스토어 내부 테스트(Internal Testing) 트랙으로 AAB 빌드 및 업로드"
+  lane :beta do
+    # 1. 플러터 앱을 AAB(Android App Bundle) 포맷으로 빌드
+    sh "flutter build appbundle --release"
+
+    # 2. 빌드된 AAB 파일을 구글 플레이 내부 테스트 트랙에 업로드
+    upload_to_play_store(
+      track: 'internal',
+      aab: '../build/app/outputs/bundle/release/app-release.aab'
+    )
+  end
+
+  desc "구글 플레이스토어 프로덕션(Production) 트랙으로 정식 출시"
+  lane :release do
+    sh "flutter build appbundle --release"
+    
+    upload_to_play_store(
+      track: 'production',
+      aab: '../build/app/outputs/bundle/release/app-release.aab'
+    )
+  end
+end
