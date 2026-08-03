@@ -1,18 +1,14 @@
 name: auth_module
 description: Authentication and Social Login UI module.
-publish_to: 'none'
 version: 0.0.1
 publish_to: none
-
 environment:
   sdk: '>=3.2.0 <4.0.0'
   flutter: ">=1.17.0"
-
 dependencies:
   flutter:
     sdk: flutter
   get: ^4.6.6
-
 dev_dependencies:
   flutter_test:
     sdk: flutter
