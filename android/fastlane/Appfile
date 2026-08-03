@@ -1,2 +1,2 @@
-json_key_file("google-play-key.json") # 구글 플레이 콘솔 API 인증 키 파일 경로 (gitignore에 등록 필수)
+json_key_file("../../keys/google-play-key.json") # 구글 플레이 콘솔 API 인증 키 파일 경로 (gitignore에 등록 필수)
 package_name("com.appfactory.app_factory_boilerplate") # 앱 패키지명
