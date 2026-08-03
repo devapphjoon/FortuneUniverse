@@ -38,6 +38,22 @@ dependencies:
   firebase_core: ^4.12.1
   ui_module:
     path: packages/ui_module
+  contact_module:
+    path: packages/contact_module
+  settings_module:
+    path: packages/settings_module
+  notice_module:
+    path: packages/notice_module
+  monetization_module:
+    path: packages/monetization_module
+  network_module:
+    path: packages/network_module
+  auth_module:
+    path: packages/auth_module
+  permission_module:
+    path: packages/permission_module
+  onboarding_module:
+    path: packages/onboarding_module
 
 dev_dependencies:
   flutter_test:
