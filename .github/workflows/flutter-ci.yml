@@ -23,7 +23,7 @@ jobs:
       - name: 🐦 Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.24.5' # 프로젝트 버전에 맞게 유동적으로 조정 가능
+          flutter-version: 'any' # 프로젝트 버전에 맞게 유동적으로 조정 가능
           channel: 'stable'
           cache: true
 
