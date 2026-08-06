@@ -30,7 +30,7 @@ class AppTranslations extends Translations {
           'terms': '이용약관',
           'privacy': '개인정보처리방침',
           'app_version': '앱 버전 정보',
-          'language': '언어 설정',
+          'language': '언어 설정 (Language)',
           'open_source_license': '오픈소스 라이선스',
           'notification_changed': '푸시 알림 수신 동의가 변경되었습니다.',
           
@@ -122,7 +122,7 @@ class AppTranslations extends Translations {
           'terms': 'Terms of Service',
           'privacy': 'Privacy Policy',
           'app_version': 'App Version',
-          'language': 'Language Settings',
+          'language': 'Language Settings (언어 설정)',
           'open_source_license': 'Open Source Licenses',
           'notification_changed': 'Push notification settings changed.',
           
