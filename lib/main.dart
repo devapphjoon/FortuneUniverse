@@ -174,6 +174,7 @@ class _MainScreenState extends State<MainScreen> {
     
     final String termsUrl = AppConfig.legalLinks['termsOfService'] ?? '';
     final String privacyUrl = AppConfig.legalLinks['privacyPolicy'] ?? '';
+    final bool isDark = Theme.of(context).brightness == Brightness.dark;
 
     return ListView(
       padding: const EdgeInsets.all(24.0),
@@ -192,10 +193,10 @@ class _MainScreenState extends State<MainScreen> {
         
         if (showDarkModeToggle)
           SettingsToggleCard(
-            title: 'dark_mode'.tr,
-            subtitle: 'dark_mode_desc'.tr,
-            icon: Icons.dark_mode,
-            value: Theme.of(context).brightness == Brightness.dark,
+            title: isDark ? 'dark_mode'.tr : 'light_mode'.tr,
+            subtitle: isDark ? 'dark_mode_desc'.tr : 'light_mode_desc'.tr,
+            icon: isDark ? Icons.dark_mode : Icons.light_mode,
+            value: isDark,
             onChanged: (val) {
               Get.changeThemeMode(val ? ThemeMode.dark : ThemeMode.light);
             },

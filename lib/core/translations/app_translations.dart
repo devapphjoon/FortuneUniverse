@@ -12,6 +12,8 @@ class AppTranslations extends Translations {
           'app_features': '앱 기능',
           'dark_mode': '다크 모드',
           'dark_mode_desc': '어두운 테마를 사용합니다',
+          'light_mode': '라이트 모드',
+          'light_mode_desc': '밝은 테마를 사용합니다',
           'push_notification': '푸시 알림 수신',
           'push_notification_desc': '새로운 소식을 받아봅니다',
           
@@ -102,6 +104,8 @@ class AppTranslations extends Translations {
           'app_features': 'App Features',
           'dark_mode': 'Dark Mode',
           'dark_mode_desc': 'Use dark theme',
+          'light_mode': 'Light Mode',
+          'light_mode_desc': 'Use bright theme',
           'push_notification': 'Push Notifications',
           'push_notification_desc': 'Receive new updates',
           
