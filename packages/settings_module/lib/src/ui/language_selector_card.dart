@@ -2,14 +2,29 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class LanguageSelectorCard extends StatelessWidget {
-  const LanguageSelectorCard({super.key});
+  final BoxDecoration? customDecoration;
+  final TextStyle? customTitleStyle;
+  final Color? customIconColor;
+  final Color? customIconBackgroundColor;
+  final Color? customTrailingColor;
+  final bool showDialogTitle;
 
-  void _showLanguageDialog(BuildContext context) {
+  const LanguageSelectorCard({
+    super.key,
+    this.customDecoration,
+    this.customTitleStyle,
+    this.customIconColor,
+    this.customIconBackgroundColor,
+    this.customTrailingColor,
+    this.showDialogTitle = false,
+  });
+
     showDialog(
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: Text('language'.tr),
+          title: showDialogTitle ? Text('language'.tr) : null,
+          contentPadding: showDialogTitle ? const EdgeInsets.fromLTRB(24.0, 20.0, 24.0, 24.0) : const EdgeInsets.symmetric(vertical: 20),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -38,17 +53,22 @@ class LanguageSelectorCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 1,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+    return Container(
+      decoration: customDecoration ?? BoxDecoration(
+        color: Theme.of(context).cardColor,
+        borderRadius: BorderRadius.circular(12),
+        boxShadow: const [
+          BoxShadow(color: Colors.black12, blurRadius: 4, offset: Offset(0, 1)),
+        ],
+      ),
       child: ListTile(
         contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
         leading: CircleAvatar(
-          backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
-          child: Icon(Icons.language, color: Theme.of(context).colorScheme.secondary),
+          backgroundColor: customIconBackgroundColor ?? Theme.of(context).colorScheme.secondaryContainer,
+          child: Icon(Icons.language, color: customIconColor ?? Theme.of(context).colorScheme.secondary),
         ),
-        title: Text('language'.tr, style: const TextStyle(fontWeight: FontWeight.w600)),
-        trailing: const Icon(Icons.chevron_right, color: Colors.grey),
+        title: Text('language'.tr, style: customTitleStyle ?? const TextStyle(fontWeight: FontWeight.w600)),
+        trailing: Icon(Icons.chevron_right, color: customTrailingColor ?? Colors.grey),
         onTap: () => _showLanguageDialog(context),
       ),
     );

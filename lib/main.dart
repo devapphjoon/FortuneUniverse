@@ -171,6 +171,9 @@ class _MainScreenState extends State<MainScreen> {
     final bool showLegalLinks = AppConfig.features['showLegalLinks'] ?? true;
     final bool showLanguageSelector = AppConfig.features['showLanguageSelector'] ?? true;
     final bool showLicense = AppConfig.features['showLicense'] ?? true;
+    final bool showPushNotifications = AppConfig.features['showPushNotifications'] ?? true;
+    final bool showContactOptions = AppConfig.features['showContactOptions'] ?? true;
+    final bool showAccountManagement = AppConfig.features['showAccountManagement'] ?? true;
     
     final String termsUrl = AppConfig.legalLinks['termsOfService'] ?? '';
     final String privacyUrl = AppConfig.legalLinks['privacyPolicy'] ?? '';
@@ -202,51 +205,53 @@ class _MainScreenState extends State<MainScreen> {
             },
           ),
           
-        const SizedBox(height: 12),
+        if (showPushNotifications) ...[
+          const SizedBox(height: 12),
+          SettingsToggleCard(
+            title: 'push_notification'.tr,
+            subtitle: 'push_notification_desc'.tr,
+            icon: Icons.notifications,
+            value: AppConfig.features['enableNotifications'] ?? false,
+            onChanged: (val) {
+              Get.snackbar('notification_changed'.tr, '');
+            },
+          ),
+        ],
         
-        SettingsToggleCard(
-          title: 'push_notification'.tr,
-          subtitle: 'push_notification_desc'.tr,
-          icon: Icons.notifications,
-          value: AppConfig.features['enableNotifications'] ?? false,
-          onChanged: (val) {
-            Get.snackbar('notification_changed'.tr, '');
-          },
-        ),
-        
-        const SizedBox(height: 40),
-        
-        Text('support_info'.tr, style: AppTypography.heading2),
-        const SizedBox(height: 16),
-        DeveloperProfileCard(info: devInfo),
-        const SizedBox(height: 16),
-        ContactOptionCard(
-          icon: Icons.email,
-          title: 'email_inquiry'.tr,
-          subtitle: devInfo.email,
-          onTap: () => sendEmail(context, devInfo.email),
-        ),
-        const SizedBox(height: 12),
-        ContactOptionCard(
-          icon: Icons.shop,
-          title: 'dev_page'.tr,
-          subtitle: 'dev_page_desc'.tr,
-          onTap: () => openDeveloperPage(context, devInfo.playStoreUrl),
-        ),
-        const SizedBox(height: 12),
-        ContactOptionCard(
-          icon: Icons.star,
-          title: 'rate_app'.tr,
-          subtitle: 'rate_app_desc'.tr,
-          onTap: () => rateApp(context, dummyPackageName),
-        ),
-        const SizedBox(height: 12),
-        ContactOptionCard(
-          icon: Icons.share,
-          title: 'share_app'.tr,
-          subtitle: 'share_app_desc'.tr,
-          onTap: () => shareApp(context, dummyPackageName),
-        ),
+        if (showContactOptions) ...[
+          const SizedBox(height: 40),
+          Text('support_info'.tr, style: AppTypography.heading2),
+          const SizedBox(height: 16),
+          DeveloperProfileCard(info: devInfo),
+          const SizedBox(height: 16),
+          ContactOptionCard(
+            icon: Icons.email,
+            title: 'email_inquiry'.tr,
+            subtitle: devInfo.email,
+            onTap: () => sendEmail(context, devInfo.email),
+          ),
+          const SizedBox(height: 12),
+          ContactOptionCard(
+            icon: Icons.shop,
+            title: 'dev_page'.tr,
+            subtitle: 'dev_page_desc'.tr,
+            onTap: () => openDeveloperPage(context, devInfo.playStoreUrl),
+          ),
+          const SizedBox(height: 12),
+          ContactOptionCard(
+            icon: Icons.star,
+            title: 'rate_app'.tr,
+            subtitle: 'rate_app_desc'.tr,
+            onTap: () => rateApp(context, dummyPackageName),
+          ),
+          const SizedBox(height: 12),
+          ContactOptionCard(
+            icon: Icons.share,
+            title: 'share_app'.tr,
+            subtitle: 'share_app_desc'.tr,
+            onTap: () => shareApp(context, dummyPackageName),
+          ),
+        ],
         
         if (showLegalLinks || showAppVersion || showLicense) ...[
           const SizedBox(height: 40),
@@ -276,55 +281,56 @@ class _MainScreenState extends State<MainScreen> {
             AppVersionCard(appName: AppConfig.appName),
         ],
         
-        const SizedBox(height: 40),
-
-        const Text('계정 관리', style: AppTypography.heading2),
-        const SizedBox(height: 16),
-        ElevatedButton(
-          style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.grey.shade200,
-            foregroundColor: Colors.black87,
+        if (showAccountManagement) ...[
+          const SizedBox(height: 40),
+          const Text('계정 관리', style: AppTypography.heading2),
+          const SizedBox(height: 16),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.grey.shade200,
+              foregroundColor: Colors.black87,
+            ),
+            onPressed: () async {
+              Get.defaultDialog(
+                title: '로그아웃',
+                middleText: '정말 로그아웃 하시겠습니까?',
+                textConfirm: '로그아웃',
+                textCancel: '취소',
+                confirmTextColor: Colors.white,
+                onConfirm: () async {
+                  Get.back();
+                  Get.dialog(const Center(child: CircularProgressIndicator()), barrierDismissible: false);
+                  await AuthManager().logout();
+                  Get.back();
+                  Get.offAll(() => const RootScreen()); // 앱 초기화면으로 강제 이동
+                },
+              );
+            },
+            child: const Text('로그아웃'),
           ),
-          onPressed: () async {
-            Get.defaultDialog(
-              title: '로그아웃',
-              middleText: '정말 로그아웃 하시겠습니까?',
-              textConfirm: '로그아웃',
-              textCancel: '취소',
-              confirmTextColor: Colors.white,
-              onConfirm: () async {
-                Get.back();
-                Get.dialog(const Center(child: CircularProgressIndicator()), barrierDismissible: false);
-                await AuthManager().logout();
-                Get.back();
-                Get.offAll(() => const RootScreen()); // 앱 초기화면으로 강제 이동
-              },
-            );
-          },
-          child: const Text('로그아웃'),
-        ),
-        const SizedBox(height: 12),
-        TextButton(
-          style: TextButton.styleFrom(foregroundColor: Colors.red),
-          onPressed: () {
-            Get.defaultDialog(
-              title: '회원 탈퇴',
-              middleText: '정말 탈퇴하시겠습니까? 모든 데이터가 삭제되며 복구할 수 없습니다.',
-              textConfirm: '탈퇴하기',
-              textCancel: '취소',
-              confirmTextColor: Colors.white,
-              buttonColor: Colors.red,
-              onConfirm: () async {
-                Get.back();
-                Get.dialog(const Center(child: CircularProgressIndicator()), barrierDismissible: false);
-                await AuthManager().deleteAccount();
-                Get.back();
-                Get.offAll(() => const RootScreen()); // 앱 초기화면으로 강제 이동
-              },
-            );
-          },
-          child: const Text('회원 탈퇴 (Account Deletion)'),
-        ),
+          const SizedBox(height: 12),
+          TextButton(
+            style: TextButton.styleFrom(foregroundColor: Colors.red),
+            onPressed: () {
+              Get.defaultDialog(
+                title: '회원 탈퇴',
+                middleText: '정말 탈퇴하시겠습니까? 모든 데이터가 삭제되며 복구할 수 없습니다.',
+                textConfirm: '탈퇴하기',
+                textCancel: '취소',
+                confirmTextColor: Colors.white,
+                buttonColor: Colors.red,
+                onConfirm: () async {
+                  Get.back();
+                  Get.dialog(const Center(child: CircularProgressIndicator()), barrierDismissible: false);
+                  await AuthManager().deleteAccount();
+                  Get.back();
+                  Get.offAll(() => const RootScreen()); // 앱 초기화면으로 강제 이동
+                },
+              );
+            },
+            child: const Text('회원 탈퇴 (Account Deletion)'),
+          ),
+        ],
         
         const SizedBox(height: 40), // 하단 여백
       ],

@@ -24,6 +24,9 @@ class AppConfig {
     'showLicense': true,
     'showAds': true,
     'checkNotices': true,
+    'showPushNotifications': true,
+    'showAccountManagement': true,
+    'showContactOptions': true,
   };
   
   // 파이어베이스 등에 올려둔 공통 약관 주소 템플릿

@@ -7,6 +7,9 @@
   },
   "features": {
     "enableNotifications": true,
-    "enablePayments": false
+    "enablePayments": false,
+    "showPushNotifications": true,
+    "showAccountManagement": true,
+    "showContactOptions": true
   }
 }

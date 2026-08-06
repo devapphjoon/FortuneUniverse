@@ -6,12 +6,19 @@ class LegalLinksCard extends StatelessWidget {
   final String termsUrl;
   final String privacyUrl;
   final String appName;
+  
+  final BoxDecoration? customDecoration;
+  final TextStyle? customTitleStyle;
+  final Color? customIconColor;
 
   const LegalLinksCard({
     super.key,
     required this.termsUrl,
     required this.privacyUrl,
     required this.appName,
+    this.customDecoration,
+    this.customTitleStyle,
+    this.customIconColor,
   });
 
   Future<void> _openLink(BuildContext context, String baseUrl) async {
@@ -36,21 +43,26 @@ class LegalLinksCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 1,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+    return Container(
+      decoration: customDecoration ?? BoxDecoration(
+        color: Theme.of(context).cardColor,
+        borderRadius: BorderRadius.circular(12),
+        boxShadow: const [
+          BoxShadow(color: Colors.black12, blurRadius: 4, offset: Offset(0, 1)),
+        ],
+      ),
       child: Column(
         children: [
           ListTile(
-            leading: const Icon(Icons.description),
-            title: Text('terms'.tr, style: const TextStyle(fontWeight: FontWeight.w600)),
+            leading: Icon(Icons.description, color: customIconColor),
+            title: Text('terms'.tr, style: customTitleStyle ?? const TextStyle(fontWeight: FontWeight.w600)),
             trailing: const Icon(Icons.open_in_new, size: 16, color: Colors.grey),
             onTap: () => _openLink(context, termsUrl),
           ),
           const Divider(height: 1, indent: 56),
           ListTile(
-            leading: const Icon(Icons.privacy_tip),
-            title: Text('privacy'.tr, style: const TextStyle(fontWeight: FontWeight.w600)),
+            leading: Icon(Icons.privacy_tip, color: customIconColor),
+            title: Text('privacy'.tr, style: customTitleStyle ?? const TextStyle(fontWeight: FontWeight.w600)),
             trailing: const Icon(Icons.open_in_new, size: 16, color: Colors.grey),
             onTap: () => _openLink(context, privacyUrl),
           ),
