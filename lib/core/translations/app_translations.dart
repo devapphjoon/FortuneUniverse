@@ -122,7 +122,7 @@ class AppTranslations extends Translations {
           'terms': 'Terms of Service',
           'privacy': 'Privacy Policy',
           'app_version': 'App Version',
-          'language': 'Language Settings (언어 설정)',
+          'language': 'Language',
           'open_source_license': 'Open Source Licenses',
           'notification_changed': 'Push notification settings changed.',
           
