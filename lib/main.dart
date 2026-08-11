@@ -7,20 +7,47 @@ import 'package:notice_module/notice_module.dart';
 import 'package:monetization_module/monetization_module.dart';
 import 'core/config/app_config.dart';
 import 'core/translations/app_translations.dart';
-import 'package:auth_module/auth_module.dart';
+import 'screens/home_screen.dart';
 import 'root_screen.dart';
+import 'screens/widgets/settings_features_card.dart';
+
+import 'core/services/audio_service.dart';
+import 'core/services/notification_service.dart';
+import 'services/daily_limit_service.dart';
+
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
-// ... existing code down to _buildSettingsTab ...
-
   WidgetsFlutterBinding.ensureInitialized();
   await AppConfig.load();
   AdManager.init(); // 애드몹 초기화 (await 제거하여 스플래시 멈춤 방지)
-  runApp(const AppFactory());
+  
+  // Initialize Services
+  await AudioService().init();
+  await NotificationService().init();
+  
+  // Load saved language
+  final prefs = await SharedPreferences.getInstance();
+  final String? savedLang = prefs.getString('language_code');
+  final String? savedCountry = prefs.getString('country_code');
+  
+  Locale initialLocale;
+  if (savedLang != null && savedCountry != null) {
+    initialLocale = Locale(savedLang, savedCountry);
+  } else {
+    initialLocale = Get.deviceLocale ?? const Locale('en', 'US');
+  }
+  
+  // Initialize DailyLimitService
+  await Get.putAsync(() => DailyLimitService().init());
+  
+  runApp(AppFactory(initialLocale: initialLocale));
 }
 
 class AppFactory extends StatelessWidget {
-  const AppFactory({super.key});
+  final Locale initialLocale;
+  
+  const AppFactory({super.key, required this.initialLocale});
 
   @override
   Widget build(BuildContext context) {
@@ -36,11 +63,11 @@ class AppFactory extends StatelessWidget {
         colorSchemeSeed: Color(int.parse(AppConfig.theme['primaryColor']?.replaceAll('#', '0xFF') ?? '0xFF2196F3')),
         brightness: Brightness.dark,
       ),
-      themeMode: ThemeMode.system, // 시스템 설정에 따라 다크모드 적용
+      themeMode: ThemeMode.dark, // 앱 전체 테마를 다크모드로 강제 고정
       translations: AppTranslations(),
-      locale: Get.deviceLocale, // 기기 언어 설정 따라감
+      locale: initialLocale, // 저장된 언어 우선 적용
       fallbackLocale: const Locale('en', 'US'), // 기본 언어는 영어
-      home: const RootScreen(), // RootScreen이 온보딩, 권한, 로그인 통제
+      home: const MainScreen(), // RootScreen이 온보딩, 권한, 로그인 통제
     );
   }
 }
@@ -79,261 +106,179 @@ class _MainScreenState extends State<MainScreen> {
       BottomNavigationBarItem(icon: const Icon(Icons.settings), label: 'tab_settings'.tr),
     ];
 
-    // 3. 좌측 슬라이드 메뉴(Drawer) 준비
-    final Widget appDrawer = Drawer(
-      child: ListView(
-        padding: EdgeInsets.zero,
-        children: [
-          DrawerHeader(
-            decoration: BoxDecoration(color: Theme.of(context).colorScheme.primary),
-            child: Text('common_menu'.tr, style: AppTypography.heading2.copyWith(color: Colors.white)),
-          ),
-          ListTile(
-            leading: const Icon(Icons.info),
-            title: Text('notice'.tr),
-            onTap: () {
-              Get.back(); // 메뉴 닫기
-              Get.snackbar('menu_clicked'.tr, 'go_to_notice'.tr);
-            },
-          ),
-        ],
-      ),
-    );
 
     // 4. ui_module의 AppScaffold 뼈대에 부품들을 주입(Injection)하여 화면 완성!
     return AppScaffold(
       title: AppConfig.appName,
       pages: appPages,
       navItems: appNavItems,
-      drawer: appDrawer, // 만약 메뉴가 필요없는 앱이라면 이 줄만 지우거나 null을 주면 메뉴가 사라집니다.
+      drawer: null, // 햄버거 메뉴 제거
+      showAppBar: false, // 상단 헤더 제거
       showBottomNav: true,
     );
   }
 
   // 첫 번째 탭 (홈)
   Widget _buildHomeTab(BuildContext context) {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text('home_canvas'.tr, style: AppTypography.body),
-          const SizedBox(height: 20),
-          AppButton(
-            text: 'home_special_btn'.tr,
-            onPressed: () => Get.snackbar('alert'.tr, 'center_screen_free'.tr),
-          ),
-          
-          if (AppConfig.features['showAds'] == true) ...[
-            const SizedBox(height: 20),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                ElevatedButton(
-                  onPressed: () {
-                    AdManager.showInterstitialAd(
-                      onAdDismissed: () => Get.snackbar('알림', '전면 광고가 종료되었습니다.'),
-                    );
-                  },
-                  child: const Text('전면 광고 보기'),
-                ),
-                const SizedBox(width: 10),
-                ElevatedButton(
-                  onPressed: () {
-                    AdManager.showRewardedAd(
-                      onUserEarnedReward: (reward) {
-                        Get.snackbar('보상 획득!', '${reward.amount} ${reward.type} 지급 완료!');
-                      },
-                      onAdDismissed: () => debugPrint('보상형 광고 창 닫힘'),
-                    );
-                  },
-                  child: const Text('보상형 광고 보기'),
-                ),
-              ],
-            ),
-            const SizedBox(height: 20),
-            const AdBannerWidget(), // 애드몹 배너 광고 부착
-            const SizedBox(height: 20),
-            const AdNativeWidget(), // 애드몹 네이티브 광고 부착
-          ]
-        ],
-      ),
-    );
+    return const HomeScreen();
   }
 
   // 두 번째 탭 (설정 및 정보)
   Widget _buildSettingsTab(BuildContext context) {
     final devInfo = DeveloperDataManager.getDeveloperInfo();
-    const String dummyPackageName = "com.hjoon.app"; // 앱 패키지명
+    const String dummyPackageName = "com.hjoon.fortune"; // 실제 앱 패키지명
 
     // AppConfig 값 읽어오기
-    final bool showDarkModeToggle = AppConfig.features['showDarkModeToggle'] ?? true;
     final bool showAppVersion = AppConfig.features['showAppVersion'] ?? true;
     final bool showLegalLinks = AppConfig.features['showLegalLinks'] ?? true;
     final bool showLanguageSelector = AppConfig.features['showLanguageSelector'] ?? true;
     final bool showLicense = AppConfig.features['showLicense'] ?? true;
-    final bool showPushNotifications = AppConfig.features['showPushNotifications'] ?? true;
     final bool showContactOptions = AppConfig.features['showContactOptions'] ?? true;
-    final bool showAccountManagement = AppConfig.features['showAccountManagement'] ?? true;
+
     
     final String termsUrl = AppConfig.legalLinks['termsOfService'] ?? '';
     final String privacyUrl = AppConfig.legalLinks['privacyPolicy'] ?? '';
     final bool isDark = Theme.of(context).brightness == Brightness.dark;
 
-    return ListView(
-      padding: const EdgeInsets.all(24.0),
-      children: [
-        Text('settings'.tr, style: AppTypography.heading1),
-        const SizedBox(height: 20),
-        
-        Text('app_features'.tr, style: AppTypography.heading2),
-        const SizedBox(height: 12),
-        
-        if (showLanguageSelector)
-          const LanguageSelectorCard(),
-          
-        if (showLanguageSelector)
-          const SizedBox(height: 12),
-        
-        if (showDarkModeToggle)
-          SettingsToggleCard(
-            title: isDark ? 'dark_mode'.tr : 'light_mode'.tr,
-            subtitle: isDark ? 'dark_mode_desc'.tr : 'light_mode_desc'.tr,
-            icon: isDark ? Icons.dark_mode : Icons.light_mode,
-            value: isDark,
-            onChanged: (val) {
-              Get.changeThemeMode(val ? ThemeMode.dark : ThemeMode.light);
-            },
-          ),
-          
-        if (showPushNotifications) ...[
-          const SizedBox(height: 12),
-          SettingsToggleCard(
-            title: 'push_notification'.tr,
-            subtitle: 'push_notification_desc'.tr,
-            icon: Icons.notifications,
-            value: AppConfig.features['enableNotifications'] ?? false,
-            onChanged: (val) {
-              Get.snackbar('notification_changed'.tr, '');
-            },
-          ),
-        ],
-        
-        if (showContactOptions) ...[
-          const SizedBox(height: 40),
-          Text('support_info'.tr, style: AppTypography.heading2),
-          const SizedBox(height: 16),
-          DeveloperProfileCard(info: devInfo),
-          const SizedBox(height: 16),
-          ContactOptionCard(
-            icon: Icons.email,
-            title: 'email_inquiry'.tr,
-            subtitle: devInfo.email,
-            onTap: () => sendEmail(context, devInfo.email),
-          ),
-          const SizedBox(height: 12),
-          ContactOptionCard(
-            icon: Icons.shop,
-            title: 'dev_page'.tr,
-            subtitle: 'dev_page_desc'.tr,
-            onTap: () => openDeveloperPage(context, devInfo.playStoreUrl),
-          ),
-          const SizedBox(height: 12),
-          ContactOptionCard(
-            icon: Icons.star,
-            title: 'rate_app'.tr,
-            subtitle: 'rate_app_desc'.tr,
-            onTap: () => rateApp(context, dummyPackageName),
-          ),
-          const SizedBox(height: 12),
-          ContactOptionCard(
-            icon: Icons.share,
-            title: 'share_app'.tr,
-            subtitle: 'share_app_desc'.tr,
-            onTap: () => shareApp(context, dummyPackageName),
-          ),
-        ],
-        
-        if (showLegalLinks || showAppVersion || showLicense) ...[
-          const SizedBox(height: 40),
-          Text('app_info'.tr, style: AppTypography.heading2),
-          const SizedBox(height: 16),
-          
-          if (showLegalLinks)
-            LegalLinksCard(
-              termsUrl: termsUrl,
-              privacyUrl: privacyUrl,
-              appName: AppConfig.appName,
+    return Container(
+      color: const Color(0xFF0F172A),
+      child: Stack(
+        children: [
+          // Background decorative elements
+          Positioned(
+            top: -100,
+            left: -100,
+            child: Container(
+              width: 300,
+              height: 300,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: const Color(0xFF8B5CF6).withOpacity(0.15),
+                boxShadow: [
+                  BoxShadow(color: const Color(0xFF8B5CF6).withOpacity(0.2), blurRadius: 100)
+                ],
+              ),
             ),
-            
-          if (showLegalLinks && (showAppVersion || showLicense))
-            const SizedBox(height: 12),
-            
-          if (showLicense)
-            LicenseCard(
-              appName: AppConfig.appName,
-              applicationVersion: '1.0.0', // 실제로는 package_info_plus에서 가져올 수 있음
-            ),
-            
-          if (showLicense && showAppVersion)
-            const SizedBox(height: 12),
-            
-          if (showAppVersion)
-            AppVersionCard(appName: AppConfig.appName),
-        ],
-        
-        if (showAccountManagement) ...[
-          const SizedBox(height: 40),
-          const Text('계정 관리', style: AppTypography.heading2),
-          const SizedBox(height: 16),
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.grey.shade200,
-              foregroundColor: Colors.black87,
-            ),
-            onPressed: () async {
-              Get.defaultDialog(
-                title: '로그아웃',
-                middleText: '정말 로그아웃 하시겠습니까?',
-                textConfirm: '로그아웃',
-                textCancel: '취소',
-                confirmTextColor: Colors.white,
-                onConfirm: () async {
-                  Get.back();
-                  Get.dialog(const Center(child: CircularProgressIndicator()), barrierDismissible: false);
-                  await AuthManager().logout();
-                  Get.back();
-                  Get.offAll(() => const RootScreen()); // 앱 초기화면으로 강제 이동
-                },
-              );
-            },
-            child: const Text('로그아웃'),
           ),
-          const SizedBox(height: 12),
-          TextButton(
-            style: TextButton.styleFrom(foregroundColor: Colors.red),
-            onPressed: () {
-              Get.defaultDialog(
-                title: '회원 탈퇴',
-                middleText: '정말 탈퇴하시겠습니까? 모든 데이터가 삭제되며 복구할 수 없습니다.',
-                textConfirm: '탈퇴하기',
-                textCancel: '취소',
-                confirmTextColor: Colors.white,
-                buttonColor: Colors.red,
-                onConfirm: () async {
-                  Get.back();
-                  Get.dialog(const Center(child: CircularProgressIndicator()), barrierDismissible: false);
-                  await AuthManager().deleteAccount();
-                  Get.back();
-                  Get.offAll(() => const RootScreen()); // 앱 초기화면으로 강제 이동
-                },
-              );
-            },
-            child: const Text('회원 탈퇴 (Account Deletion)'),
+          Positioned(
+            bottom: -50,
+            right: -50,
+            child: Container(
+              width: 250,
+              height: 250,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: const Color(0xFF4C1D95).withOpacity(0.2),
+                boxShadow: [
+                  BoxShadow(color: const Color(0xFF4C1D95).withOpacity(0.2), blurRadius: 100)
+                ],
+              ),
+            ),
+          ),
+          SafeArea(
+            child: Theme(
+              data: ThemeData.dark().copyWith(
+                cardColor: Colors.white.withOpacity(0.05),
+                colorScheme: ThemeData.dark().colorScheme.copyWith(
+                  primaryContainer: Colors.white.withOpacity(0.2), // 아이콘 배경 밝기 통일
+                  secondaryContainer: Colors.white.withOpacity(0.2), // 언어 아이콘 배경 밝기 통일
+                  primary: Colors.white,
+                  secondary: Colors.white,
+                ),
+                textTheme: ThemeData.dark().textTheme.apply(
+                  bodyColor: Colors.white,
+                  displayColor: Colors.white,
+                ),
+                iconTheme: const IconThemeData(color: Colors.white),
+                listTileTheme: const ListTileThemeData(
+                  iconColor: Colors.white,
+                  textColor: Colors.white,
+                ),
+              ),
+              child: ListView(
+                padding: const EdgeInsets.all(24.0),
+                children: [
+                  Text('settings'.tr, style: AppTypography.heading1.copyWith(color: Colors.white)),
+                  const SizedBox(height: 20),
+                  
+                  Text('app_features'.tr, style: AppTypography.heading2.copyWith(color: Colors.white)),
+                  const SizedBox(height: 12),
+                  
+                  if (showLanguageSelector) ...[
+                    const LanguageSelectorCard(),
+                    const SizedBox(height: 12),
+                  ],
+                  const SettingsFeaturesCard(),
+                  
+                  if (showContactOptions) ...[
+                    const SizedBox(height: 40),
+                    Text('support_info'.tr, style: AppTypography.heading2.copyWith(color: Colors.white)),
+                    const SizedBox(height: 16),
+                    DeveloperProfileCard(info: devInfo),
+                    const SizedBox(height: 16),
+                    ContactOptionCard(
+                      icon: Icons.email,
+                      title: 'email_inquiry'.tr,
+                      subtitle: devInfo.email,
+                      onTap: () => sendEmail(context, devInfo.email),
+                    ),
+                    const SizedBox(height: 12),
+                    ContactOptionCard(
+                      icon: Icons.shop,
+                      title: 'dev_page'.tr,
+                      subtitle: 'dev_page_desc'.tr,
+                      onTap: () => openDeveloperPage(context, devInfo.playStoreUrl),
+                    ),
+                    const SizedBox(height: 12),
+                    ContactOptionCard(
+                      icon: Icons.star,
+                      title: 'rate_app'.tr,
+                      subtitle: 'rate_app_desc'.tr,
+                      onTap: () => rateApp(context, dummyPackageName),
+                    ),
+                    const SizedBox(height: 12),
+                    ContactOptionCard(
+                      icon: Icons.share,
+                      title: 'share_app'.tr,
+                      subtitle: 'share_app_desc'.tr,
+                      onTap: () => shareApp(context, dummyPackageName),
+                    ),
+                  ],
+                  
+                  if (showLegalLinks || showAppVersion || showLicense) ...[
+                    const SizedBox(height: 40),
+                    Text('app_info'.tr, style: AppTypography.heading2.copyWith(color: Colors.white)),
+                    const SizedBox(height: 16),
+                    
+                    if (showLegalLinks)
+                      LegalLinksCard(
+                        termsUrl: termsUrl,
+                        privacyUrl: privacyUrl,
+                        appName: AppConfig.appName,
+                      ),
+                      
+                    if (showLegalLinks && (showAppVersion || showLicense))
+                      const SizedBox(height: 12),
+                      
+                    if (showLicense)
+                      LicenseCard(
+                        appName: AppConfig.appName,
+                      ),
+                      
+                    if (showLicense && showAppVersion)
+                      const SizedBox(height: 12),
+                      
+                    if (showAppVersion)
+                      AppVersionCard(appName: AppConfig.appName),
+                  ],
+                  
+                  const SizedBox(height: 40), // 하단 여백
+                ],
+              ),
+            ),
           ),
         ],
-        
-        const SizedBox(height: 40), // 하단 여백
-      ],
+      ),
     );
   }
 }

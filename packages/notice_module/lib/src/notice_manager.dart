@@ -10,8 +10,8 @@ class NoticeManager {
     // 여기서는 테스트를 위해 1초 대기 후 가짜 데이터 반환
     await Future.delayed(const Duration(seconds: 1));
 
-    // 더미 서버 응답
-    const bool hasNotice = true;
+    // 현재 앱은 서버 통신이 없으므로 임시로 false 처리
+    const bool hasNotice = false;
     final String noticeTitle = "notice_update_title".tr;
     final String noticeContent = "notice_update_content".tr;
     const bool isForceUpdate = false; // 강제 업데이트 여부 (true면 스토어로 유도)

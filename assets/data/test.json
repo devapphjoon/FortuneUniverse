@@ -1,0 +1,128 @@
+{
+  "testId": "animal_spirit",
+  "title": {
+    "ko": "나의 숨겨진 수호 동물 테스트",
+    "en": "My Hidden Spirit Animal Test"
+  },
+  "description": {
+    "ko": "깊은 숲 속을 탐험하며 내면의 무의식을 지켜주는 영혼의 수호 동물을 알아보세요.",
+    "en": "Explore the deep forest and discover the spirit animal that guards your inner unconsciousness."
+  },
+  "questions": [
+    {
+      "id": 1,
+      "question": {
+        "ko": "아무도 없는 깊은 숲 속, 갑자기 들려오는 소리는?",
+        "en": "In a deep forest with no one around, what is the sudden sound you hear?"
+      },
+      "options": [
+        { "text": { "ko": "바람에 나뭇잎이 스치는 바스락거리는 소리", "en": "The rustling sound of leaves brushing in the wind" }, "scoreType": "D" },
+        { "text": { "ko": "어디선가 들려오는 맑고 경쾌한 새소리", "en": "A clear and cheerful bird song from somewhere" }, "scoreType": "B" },
+        { "text": { "ko": "멀리서 힘차게 떨어지는 폭포수 소리", "en": "The sound of a waterfall powerfully dropping in the distance" }, "scoreType": "C" },
+        { "text": { "ko": "알 수 없는 짐승의 묵직한 발걸음 소리", "en": "The heavy footsteps of an unknown beast" }, "scoreType": "A" }
+      ]
+    },
+    {
+      "id": 2,
+      "question": {
+        "ko": "눈앞에 갈림길이 나타났습니다. 당신의 선택은?",
+        "en": "A crossroad appears before you. What is your choice?"
+      },
+      "options": [
+        { "text": { "ko": "안전하고 평탄해 보이는 넓은 흙길", "en": "A wide dirt path that looks safe and flat" }, "scoreType": "B" },
+        { "text": { "ko": "험난하지만 흥미로워 보이는 좁은 오솔길", "en": "A narrow trail that looks tough but interesting" }, "scoreType": "C" },
+        { "text": { "ko": "길이 없는 곳으로 직접 길을 개척하며 간다", "en": "Pave a new path where there is no road" }, "scoreType": "A" },
+        { "text": { "ko": "주변에 남겨진 누군가의 발자국을 따라간다", "en": "Follow someone's footprints left nearby" }, "scoreType": "D" }
+      ]
+    },
+    {
+      "id": 3,
+      "question": {
+        "ko": "길을 걷다 우연히 마주친 낡은 보물상자. 상자를 열자 무엇이 들어있나요?",
+        "en": "You stumble upon an old treasure chest while walking. What is inside when you open it?"
+      },
+      "options": [
+        { "text": { "ko": "눈이 부시게 빛나는 화려한 보석", "en": "A dazzling, brilliantly shining jewel" }, "scoreType": "C" },
+        { "text": { "ko": "오랜 지혜가 담겨 있을 것 같은 낡은 양피지 지도", "en": "An old parchment map that seems to contain ancient wisdom" }, "scoreType": "A" },
+        { "text": { "ko": "누군가의 따뜻한 마음이 느껴지는 수제 나무 조각상", "en": "A handmade wooden sculpture radiating someone's warmth" }, "scoreType": "B" },
+        { "text": { "ko": "나의 모습을 뚜렷하게 비추는 신비로운 거울", "en": "A mysterious mirror that clearly reflects my image" }, "scoreType": "D" }
+      ]
+    },
+    {
+      "id": 4,
+      "question": {
+        "ko": "숲속에 갑작스럽게 비가 쏟아집니다. 당신은 어떻게 하나요?",
+        "en": "It suddenly starts pouring rain in the forest. What do you do?"
+      },
+      "options": [
+        { "text": { "ko": "비를 뚫고 목적지를 향해 계속 뛰어간다", "en": "Keep running towards the destination through the rain" }, "scoreType": "A" },
+        { "text": { "ko": "주변의 커다란 나뭇잎을 꺾어 우산처럼 쓴다", "en": "Pluck a large leaf nearby and use it as an umbrella" }, "scoreType": "C" },
+        { "text": { "ko": "근처에 보이는 작은 동굴에 들어가 비가 그치길 기다린다", "en": "Enter a small cave nearby and wait for the rain to stop" }, "scoreType": "B" },
+        { "text": { "ko": "비 맞는 것을 즐기며 천천히 걸어간다", "en": "Enjoy getting wet and walk slowly" }, "scoreType": "D" }
+      ]
+    },
+    {
+      "id": 5,
+      "question": {
+        "ko": "드디어 숲을 빠져나왔습니다. 눈앞에 펼쳐진 풍경은?",
+        "en": "You finally made it out of the forest. What is the scenery unfolding before your eyes?"
+      },
+      "options": [
+        { "text": { "ko": "끝없이 펼쳐진 시원하고 광활한 바다", "en": "An endlessly stretching, cool, and vast ocean" }, "scoreType": "C" },
+        { "text": { "ko": "평화롭고 따뜻한 햇살이 내리쬐는 들판", "en": "A peaceful field bathed in warm sunlight" }, "scoreType": "B" },
+        { "text": { "ko": "구름 위로 우뚝 솟아오른 장엄한 높은 산", "en": "A majestic high mountain towering above the clouds" }, "scoreType": "A" },
+        { "text": { "ko": "별빛이 쏟아지는 아름다운 밤하늘", "en": "A beautiful night sky filled with pouring starlight" }, "scoreType": "D" }
+      ]
+    }
+  ],
+  "results": [
+    {
+      "id": "A",
+      "title": { "ko": "독립적인 검은 표범", "en": "Independent Black Panther" },
+      "basicDescription": {
+        "ko": "당신은 타인의 시선에 얽매이지 않고 자신의 길을 묵묵히 걸어가는 강인한 멘탈의 소유자입니다. 주관이 뚜렷하며 어떤 어려움이 닥쳐도 스스로 헤쳐 나가는 능력이 탁월합니다. 때로는 차가워 보이지만, 내 사람은 확실히 챙기는 츤데레 같은 매력이 있습니다.",
+        "en": "You have a strong mentality, silently walking your own path without being bound by others' opinions. You have clear principles and excel at overcoming any difficulties on your own. You may seem cold at times, but you have a tsundere charm that definitely takes care of your people."
+      },
+      "premiumMatch": {
+        "ko": "✨ 최고의 궁합: 자유로운 영혼의 '붉은 여우'\n💔 최악의 궁합: 규칙을 중시하는 '충직한 늑대'\n\n올해 당신에게 귀인이 될 사람은 예기치 못한 장소나 새로운 도전 과정에서 만날 확률이 높습니다. 고집을 조금만 내려놓으면 훨씬 더 많은 행운이 찾아옵니다.",
+        "en": "✨ Best Match: Free-spirited 'Red Fox'\n💔 Worst Match: Rule-abiding 'Loyal Wolf'\n\nThe person who will be your noble benefactor this year is highly likely to be met in an unexpected place or during a new challenge. If you let go of your stubbornness just a little bit, much more luck will come to you."
+      }
+    },
+    {
+      "id": "B",
+      "title": { "ko": "평화를 사랑하는 은빛 사슴", "en": "Peace-loving Silver Deer" },
+      "basicDescription": {
+        "ko": "당신은 따뜻한 공감 능력으로 주변 사람들을 편안하게 해주는 힐러 같은 존재입니다. 갈등을 싫어하며 소소한 일상에서 작은 행복을 찾는 것을 좋아합니다. 타인의 이야기를 잘 들어주어 주변에 늘 사람이 끊이지 않습니다.",
+        "en": "You are a healer-like presence who makes people around you comfortable with warm empathy. You dislike conflict and like finding small happiness in everyday life. You listen well to others' stories, so you are always surrounded by people."
+      },
+      "premiumMatch": {
+        "ko": "✨ 최고의 궁합: 든든한 버팀목 '큰 곰'\n💔 최악의 궁합: 예측 불허의 '날쌘 매'\n\n다른 사람을 배려하느라 정작 자신의 감정을 억누르는 경향이 있습니다. 가끔은 이기적으로 당신의 목소리를 내는 것이 관계의 질을 높이는 데 큰 도움이 됩니다.",
+        "en": "✨ Best Match: Reliable support 'Big Bear'\n💔 Worst Match: Unpredictable 'Swift Falcon'\n\nYou tend to suppress your own feelings while being considerate of others. Sometimes being selfish and voicing your opinions greatly helps improve the quality of your relationships."
+      }
+    },
+    {
+      "id": "C",
+      "title": { "ko": "모험을 즐기는 날쌘 독수리", "en": "Adventure-loving Swift Eagle" },
+      "basicDescription": {
+        "ko": "당신은 넓은 시야와 끝없는 호기심을 가진 열정적인 도전가입니다. 반복되고 지루한 일상을 견디기 힘들어하며, 늘 새로운 목표를 향해 비상하는 것을 꿈꿉니다. 목표가 생기면 놀라운 집중력을 발휘하여 반드시 쟁취해 냅니다.",
+        "en": "You are a passionate challenger with a broad perspective and endless curiosity. You find repetitive and boring routines hard to endure and always dream of soaring towards new goals. When you have a goal, you show amazing focus and surely achieve it."
+      },
+      "premiumMatch": {
+        "ko": "✨ 최고의 궁합: 재치 있는 '꾀돌이 원숭이'\n💔 최악의 궁합: 안정 지향적인 '은빛 사슴'\n\n다음 달에 당신의 도전을 전폭적으로 지지해줄 든든한 파트너가 나타날 운세입니다. 다만, 추진력이 앞서 주변 사람들의 속도를 맞추지 못할 수 있으니 템포 조절이 필요합니다.",
+        "en": "✨ Best Match: Witty 'Clever Monkey'\n💔 Worst Match: Stability-oriented 'Silver Deer'\n\nNext month, a reliable partner who fully supports your challenge is destined to appear. However, your drive might outpace others, so pacing yourself is necessary."
+      }
+    },
+    {
+      "id": "D",
+      "title": { "ko": "신비로운 직감의 보라색 고양이", "en": "Mysterious Intuition Purple Cat" },
+      "basicDescription": {
+        "ko": "당신은 남들이 보지 못하는 이면을 꿰뚫어 보는 예리한 직관력을 가지고 있습니다. 감수성이 풍부하고 예술적인 기질이 다분하며, 혼자만의 시간을 통해 에너지를 충전합니다. 특유의 몽환적이고 신비로운 분위기로 사람들을 매료시킵니다.",
+        "en": "You have sharp intuition that sees through what others cannot see. You are highly sensitive and artistic, and you recharge your energy through alone time. You captivate people with your unique dreamy and mysterious atmosphere."
+      },
+      "premiumMatch": {
+        "ko": "✨ 최고의 궁합: 지혜로운 '밤의 올빼미'\n💔 최악의 궁합: 활동적인 '황금 사자'\n\n논리적이고 이성적인 판단보다는 당신의 첫 번째 '직감'이 정답일 확률이 매우 높습니다. 조만간 당신의 창의적인 아이디어가 뜻밖의 금전적 수익으로 연결될 수 있습니다.",
+        "en": "✨ Best Match: Wise 'Night Owl'\n💔 Worst Match: Active 'Golden Lion'\n\nRather than logical and rational judgment, your first 'intuition' is highly likely to be the correct answer. Soon, your creative idea may lead to unexpected financial profit."
+      }
+    }
+  ]
+}

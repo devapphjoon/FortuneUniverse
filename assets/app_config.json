@@ -1,15 +1,14 @@
 {
-  "appName": "App Factory Boilerplate",
-  "apiBaseUrl": "https://api.appfactory.com",
+  "appName": "별빛 운세",
   "theme": {
-    "primaryColor": "#6200EE",
-    "isDarkMode": false
+    "primaryColor": "#8B5CF6",
+    "isDarkMode": true
   },
   "features": {
-    "enableNotifications": true,
-    "enablePayments": false,
-    "showPushNotifications": true,
-    "showAccountManagement": true,
-    "showContactOptions": true
+    "showContactOptions": true,
+    "showLegalLinks": true
+  },
+  "legalLinks": {
+    "privacyPolicy": "https://app.notion.com/p/Privacy-Policy-for-Fortune-Universe-3b9a22ab016f80c98689da581fab4547?source=copy_link"
   }
 }

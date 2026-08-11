@@ -15,23 +15,15 @@ class AppConfig {
   
   // 앱마다 다르게 껐다 켤 수 있는 기능 스위치 (Feature Flags)
   static const Map<String, dynamic> features = {
-    'enableNotifications': true,
-    'enablePayments': false,
-    'showDarkModeToggle': true,
     'showAppVersion': true,
     'showLegalLinks': true,
     'showLanguageSelector': true,
     'showLicense': true,
-    'showAds': true,
-    'checkNotices': true,
-    'showPushNotifications': true,
-    'showAccountManagement': true,
     'showContactOptions': true,
   };
   
   // 파이어베이스 등에 올려둔 공통 약관 주소 템플릿
   static const Map<String, dynamic> legalLinks = {
-    'termsOfService': 'https://my-firebase-app.web.app/terms',
-    'privacyPolicy': 'https://my-firebase-app.web.app/privacy',
+    'privacyPolicy': 'https://app.notion.com/p/Privacy-Policy-for-Fortune-Universe-3b9a22ab016f80c98689da581fab4547?source=copy_link',
   };
 }

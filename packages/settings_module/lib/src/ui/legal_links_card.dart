@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class LegalLinksCard extends StatelessWidget {
-  final String termsUrl;
+  final String? termsUrl;
   final String privacyUrl;
   final String appName;
   
@@ -13,7 +13,7 @@ class LegalLinksCard extends StatelessWidget {
 
   const LegalLinksCard({
     super.key,
-    required this.termsUrl,
+    this.termsUrl,
     required this.privacyUrl,
     required this.appName,
     this.customDecoration,
@@ -53,13 +53,15 @@ class LegalLinksCard extends StatelessWidget {
       ),
       child: Column(
         children: [
-          ListTile(
-            leading: Icon(Icons.description, color: customIconColor),
-            title: Text('terms'.tr, style: customTitleStyle ?? const TextStyle(fontWeight: FontWeight.w600)),
-            trailing: const Icon(Icons.open_in_new, size: 16, color: Colors.grey),
-            onTap: () => _openLink(context, termsUrl),
-          ),
-          const Divider(height: 1, indent: 56),
+          if (termsUrl != null && termsUrl!.isNotEmpty) ...[
+            ListTile(
+              leading: Icon(Icons.description, color: customIconColor),
+              title: Text('terms'.tr, style: customTitleStyle ?? const TextStyle(fontWeight: FontWeight.w600)),
+              trailing: const Icon(Icons.open_in_new, size: 16, color: Colors.grey),
+              onTap: () => _openLink(context, termsUrl!),
+            ),
+            const Divider(height: 1, indent: 56),
+          ],
           ListTile(
             leading: Icon(Icons.privacy_tip, color: customIconColor),
             title: Text('privacy'.tr, style: customTitleStyle ?? const TextStyle(fontWeight: FontWeight.w600)),

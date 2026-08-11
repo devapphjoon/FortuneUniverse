@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LanguageSelectorCard extends StatelessWidget {
   final BoxDecoration? customDecoration;
@@ -19,6 +20,7 @@ class LanguageSelectorCard extends StatelessWidget {
     this.showDialogTitle = false,
   });
 
+  void _showLanguageDialog(BuildContext context) {
     showDialog(
       context: context,
       builder: (context) {
@@ -31,17 +33,23 @@ class LanguageSelectorCard extends StatelessWidget {
               ListTile(
                 title: const Text('한국어'),
                 trailing: Get.locale?.languageCode == 'ko' ? Icon(Icons.check, color: Theme.of(context).colorScheme.primary) : null,
-                onTap: () {
+                onTap: () async {
                   Get.updateLocale(const Locale('ko', 'KR'));
-                  Navigator.pop(context);
+                  final prefs = await SharedPreferences.getInstance();
+                  await prefs.setString('language_code', 'ko');
+                  await prefs.setString('country_code', 'KR');
+                  if (context.mounted) Navigator.pop(context);
                 },
               ),
               ListTile(
                 title: const Text('English'),
                 trailing: Get.locale?.languageCode == 'en' ? Icon(Icons.check, color: Theme.of(context).colorScheme.primary) : null,
-                onTap: () {
+                onTap: () async {
                   Get.updateLocale(const Locale('en', 'US'));
-                  Navigator.pop(context);
+                  final prefs = await SharedPreferences.getInstance();
+                  await prefs.setString('language_code', 'en');
+                  await prefs.setString('country_code', 'US');
+                  if (context.mounted) Navigator.pop(context);
                 },
               ),
             ],

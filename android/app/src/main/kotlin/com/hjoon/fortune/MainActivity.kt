@@ -1,4 +1,4 @@
-package com.appfactory.app_factory_boilerplate
+package com.hjoon.fortune
 
 import io.flutter.embedding.android.FlutterActivity
 

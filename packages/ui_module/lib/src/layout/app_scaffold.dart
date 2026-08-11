@@ -4,7 +4,9 @@ class AppScaffold extends StatefulWidget {
   final List<Widget> pages;
   final List<BottomNavigationBarItem>? navItems;
   final Widget? drawer;
+  final Widget? bottomFixedWidget;
   final bool showBottomNav;
+  final bool showAppBar;
   final String title;
 
   const AppScaffold({
@@ -12,7 +14,9 @@ class AppScaffold extends StatefulWidget {
     required this.pages,
     this.navItems,
     this.drawer,
+    this.bottomFixedWidget,
     this.showBottomNav = true,
+    this.showAppBar = true,
     required this.title,
   });
 
@@ -39,22 +43,31 @@ class _AppScaffoldState extends State<AppScaffold> {
                                  widget.navItems!.length == widget.pages.length;
 
     return Scaffold(
-      appBar: AppBar(
+      appBar: widget.showAppBar ? AppBar(
         title: Text(widget.title),
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-      ),
+      ) : null,
       drawer: widget.drawer, // 옵션으로 들어온 메뉴(Drawer) 띄우기
       body: widget.pages.isNotEmpty 
           ? widget.pages[_selectedIndex] 
           : const Center(child: Text('페이지가 없습니다.')),
-      bottomNavigationBar: canShowBottomNav
-          ? BottomNavigationBar(
+      bottomNavigationBar: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          if (canShowBottomNav)
+            BottomNavigationBar(
               items: widget.navItems!,
               currentIndex: _selectedIndex,
               selectedItemColor: Theme.of(context).colorScheme.primary,
               onTap: _onItemTapped,
-            )
-          : null,
+            ),
+          if (widget.bottomFixedWidget != null)
+            SafeArea(
+              top: false,
+              child: widget.bottomFixedWidget!,
+            ),
+        ],
+      ),
     );
   }
 }

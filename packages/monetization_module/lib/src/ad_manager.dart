@@ -108,11 +108,13 @@ class AdManager {
     required Function(RewardItem) onUserEarnedReward,
     VoidCallback? onAdDismissed,
     bool showPrompt = true, // 기본적으로 시청 의사 확인 팝업을 띄움
+    String? customTitle,
+    String? customMessage,
   }) {
     if (showPrompt) {
       Get.defaultDialog(
-        title: '광고 시청',
-        middleText: '짧은 동영상 광고를 시청하고 보상을 획득하시겠습니까?',
+        title: customTitle ?? '광고 시청',
+        middleText: customMessage ?? '동영상 광고를 시청하고 보상을 획득하시겠습니까?',
         textConfirm: '시청하기',
         textCancel: '취소',
         confirmTextColor: Colors.white,

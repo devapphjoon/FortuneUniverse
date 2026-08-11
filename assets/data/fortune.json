@@ -1,0 +1,127 @@
+[
+  {
+    "id": 0,
+    "quote": { "ko": "오늘은 뜻밖의 행운이 당신을 향해 미소 짓고 있습니다.", "en": "Today, unexpected luck is smiling at you." },
+    "premiumDetail": { "ko": "오후 3시경, 평소 연락하지 않던 지인에게서 반가운 소식이나 좋은 제안이 올 수 있습니다. 열린 마음으로 받아들이세요.", "en": "Around 3 PM, you may receive good news or a great proposal from an acquaintance you haven't contacted in a while. Accept it with an open mind." }
+  },
+  {
+    "id": 1,
+    "quote": { "ko": "작은 친절이 큰 기적으로 돌아오는 하루가 될 것입니다.", "en": "A small kindness will return as a great miracle today." },
+    "premiumDetail": { "ko": "오늘 누군가에게 베푼 사소한 도움이 나중에 당신의 커리어에 결정적인 기회를 가져다주는 나비효과가 됩니다.", "en": "A small favor you do for someone today will create a butterfly effect, bringing a crucial opportunity to your career later." }
+  },
+  {
+    "id": 2,
+    "quote": { "ko": "걱정하던 일은 기우에 불과했습니다. 편안한 마음을 가지세요.", "en": "Your worries were groundless. Put your mind at ease." },
+    "premiumDetail": { "ko": "당신을 괴롭히던 문제의 실마리가 내일 아침 자연스럽게 풀릴 것입니다. 오늘 밤은 아무 생각 없이 푹 쉬는 것이 최고의 해결책입니다.", "en": "The clue to the problem bothering you will naturally be resolved tomorrow morning. Getting a good night's rest without overthinking is the best solution for tonight." }
+  },
+  {
+    "id": 3,
+    "quote": { "ko": "조금 늦어지는 것 같아도, 모든 것은 완벽한 타이밍에 이루어집니다.", "en": "Even if it seems a bit delayed, everything happens at the perfect timing." },
+    "premiumDetail": { "ko": "현재 진행 중인 일이 지연되는 것은 더 나은 결과를 위한 준비 과정입니다. 주말을 기점으로 놀라운 반전이 기다리고 있습니다.", "en": "The delay in your current work is a preparation process for better results. An amazing twist awaits you starting this weekend." }
+  },
+  {
+    "id": 4,
+    "quote": { "ko": "오늘은 직감이 당신을 올바른 길로 인도할 것입니다.", "en": "Your intuition will guide you to the right path today." },
+    "premiumDetail": { "ko": "논리보다는 첫인상과 직감을 믿으세요. 특히 오늘 내리는 금전적인 결정은 장기적으로 큰 이익을 가져다줍니다.", "en": "Trust your first impressions and intuition over logic. Especially financial decisions made today will bring great long-term profits." }
+  },
+  {
+    "id": 5,
+    "quote": { "ko": "새로운 시작을 하기에 완벽한 하루입니다.", "en": "It's a perfect day to make a new start." },
+    "premiumDetail": { "ko": "미뤄왔던 취미나 공부를 시작해 보세요. 오늘 시작한 작은 발걸음이 내년 이맘때쯤 당신의 삶을 크게 바꿔놓을 것입니다.", "en": "Start a hobby or study you've been putting off. The small step you take today will drastically change your life around this time next year." }
+  },
+  {
+    "id": 6,
+    "quote": { "ko": "누군가 당신의 능력을 유심히 지켜보고 있습니다.", "en": "Someone is closely observing your abilities." },
+    "premiumDetail": { "ko": "직장이나 학교에서 당신의 성실함이 빛을 발하고 있습니다. 조만간 예상치 못한 칭찬이나 스카우트 제의를 받을 수 있습니다.", "en": "Your diligence is shining at work or school. You may receive unexpected praise or a scouting offer soon." }
+  },
+  {
+    "id": 7,
+    "quote": { "ko": "지나간 인연에 얽매이지 마세요. 더 빛나는 사람이 다가옵니다.", "en": "Don't dwell on past relationships. Someone brighter is approaching." },
+    "premiumDetail": { "ko": "과거에 대한 미련을 버리는 순간, 새로운 애정운이 열립니다. 파란색 계열의 아이템을 소지하면 좋은 인연을 끌어당깁니다.", "en": "The moment you let go of regrets about the past, a new love luck opens up. Carrying a blue-colored item will attract a good relationship." }
+  },
+  {
+    "id": 8,
+    "quote": { "ko": "우연한 발견이 큰 기쁨을 가져다줄 것입니다.", "en": "A serendipitous discovery will bring you great joy." },
+    "premiumDetail": { "ko": "평소 가지 않던 길로 가보거나 새로운 메뉴를 시도해 보세요. 그 사소한 변화 속에서 아주 특별한 아이디어나 인연을 얻게 됩니다.", "en": "Try taking a different route or trying a new menu. In that minor change, you will gain a very special idea or connection." }
+  },
+  {
+    "id": 9,
+    "quote": { "ko": "오늘은 당신의 말 한마디가 천 냥 빚을 갚는 날입니다.", "en": "Today is a day when your words can work wonders." },
+    "premiumDetail": { "ko": "어려운 상황에 처했을 때 솔직하고 진정성 있는 대화를 시도하세요. 상대방이 당신의 진심에 크게 감동하여 든든한 조력자가 될 것입니다.", "en": "When in a difficult situation, try an honest and sincere conversation. The other person will be deeply moved by your sincerity and become a strong supporter." }
+  },
+  {
+    "id": 10,
+    "quote": { "ko": "충분한 휴식이 그 어느 때보다 필요한 시점입니다.", "en": "Adequate rest is needed now more than ever." },
+    "premiumDetail": { "ko": "에너지가 고갈되기 직전입니다. 오늘 저녁의 모든 약속을 취소하고 나만을 위한 시간을 보내면 내일 엄청난 활력을 얻게 됩니다.", "en": "You are on the verge of energy depletion. Canceling all appointments this evening and spending time for yourself will give you tremendous vitality tomorrow." }
+  },
+  {
+    "id": 11,
+    "quote": { "ko": "당신의 숨겨진 재능을 발견하게 될 뜻깊은 날입니다.", "en": "It is a meaningful day when you will discover your hidden talents." },
+    "premiumDetail": { "ko": "우연히 맡게 된 작은 업무에서 당신의 천재성이 발휘됩니다. 주저하지 말고 당신의 아이디어를 적극적으로 어필하세요.", "en": "Your genius will be revealed in a small task you took on by chance. Don't hesitate and actively promote your ideas." }
+  },
+  {
+    "id": 12,
+    "quote": { "ko": "베푸는 만큼 두 배로 돌아오는 긍정의 에너지가 흐릅니다.", "en": "Positive energy flows where you get back twice as much as you give." },
+    "premiumDetail": { "ko": "동료에게 커피를 사거나 따뜻한 위로를 건네보세요. 금전적인 지출보다 훨씬 값진 인맥과 신뢰를 얻게 되는 중요한 날입니다.", "en": "Buy coffee for a colleague or offer warm consolation. It is an important day to gain much more valuable networks and trust than financial expenditure." }
+  },
+  {
+    "id": 13,
+    "quote": { "ko": "불확실성 속에 숨겨진 확실한 기회를 잡게 됩니다.", "en": "You will catch a definite opportunity hidden in uncertainty." },
+    "premiumDetail": { "ko": "남들이 모두 피하는 어려운 선택지에 정답이 있습니다. 리스크를 감수하고 과감히 도전한다면 경쟁자들을 크게 따돌릴 수 있습니다.", "en": "The answer lies in the difficult option that everyone else avoids. If you take the risk and boldly challenge it, you can leave your competitors far behind." }
+  },
+  {
+    "id": 14,
+    "quote": { "ko": "가족이나 가까운 친구로부터 위안을 얻을 수 있습니다.", "en": "You can find comfort from family or close friends." },
+    "premiumDetail": { "ko": "혼자 끙끙 앓던 고민이 있다면 오늘 밤 가족에게 털어놓으세요. 생각보다 훨씬 간단하고 명쾌한 해답을 듣게 될 것입니다.", "en": "If you have a worry you've been struggling with alone, confide in your family tonight. You will hear a much simpler and clearer answer than you thought." }
+  },
+  {
+    "id": 15,
+    "quote": { "ko": "행운의 여신이 당신의 어깨에 앉았습니다.", "en": "The goddess of luck is sitting on your shoulder." },
+    "premiumDetail": { "ko": "경품 응모나 소소한 투자에서 이득을 볼 수 있는 강한 재물운이 들어왔습니다. 평소 눈여겨보던 주식이나 복권에 관심을 가져보세요.", "en": "A strong wealth luck has arrived where you can profit from prize entries or minor investments. Pay attention to stocks or lotteries you've been eyeing." }
+  },
+  {
+    "id": 16,
+    "quote": { "ko": "지친 일상 속 한 줄기 오아시스 같은 소식이 들려옵니다.", "en": "News like an oasis in your exhausted daily life will be heard." },
+    "premiumDetail": { "ko": "목빠지게 기다리던 결과(합격, 승진, 계약 등)가 긍정적인 방향으로 들려옵니다. 스마트폰의 알림을 주의 깊게 확인하세요.", "en": "The result you've been eagerly waiting for (acceptance, promotion, contract, etc.) will come in a positive direction. Check your smartphone notifications carefully." }
+  },
+  {
+    "id": 17,
+    "quote": { "ko": "당신의 인내가 마침내 달콤한 열매를 맺습니다.", "en": "Your patience finally bears sweet fruit." },
+    "premiumDetail": { "ko": "오랫동안 포기하지 않고 꾸준히 노력해온 분야에서 드디어 성과가 나타납니다. 오늘 하루는 자신을 마음껏 칭찬해 주어도 좋습니다.", "en": "Results are finally showing in the field you've been consistently working on without giving up. You can praise yourself to your heart's content today." }
+  },
+  {
+    "id": 18,
+    "quote": { "ko": "예상치 못한 장소에서 소중한 물건을 찾게 됩니다.", "en": "You will find a precious item in an unexpected place." },
+    "premiumDetail": { "ko": "잃어버렸다고 생각했던 소중한 물건이나 잊고 있던 비상금을 발견할 수 있습니다. 안 입던 겉옷 주머니나 책상 서랍 깊은 곳을 살펴보세요.", "en": "You may find a precious item you thought you lost or emergency funds you forgot about. Look inside the pockets of coats you don't wear or deep in your desk drawers." }
+  },
+  {
+    "id": 19,
+    "quote": { "ko": "오늘은 양보하는 것이 결국이기는 길입니다.", "en": "Yielding today is ultimately the way to win." },
+    "premiumDetail": { "ko": "의견 충돌이 발생했을 때 한 발짝 물러서면 상대방의 신뢰를 크게 얻을 수 있습니다. 이것이 훗날 엄청난 혜택으로 돌아옵니다.", "en": "Taking a step back when a conflict of opinion arises will greatly earn the other person's trust. This will return as a tremendous benefit later." }
+  },
+  {
+    "id": 20,
+    "quote": { "ko": "오래된 인연에서 새로운 불꽃이 튈 수 있습니다.", "en": "A new spark may fly from an old relationship." },
+    "premiumDetail": { "ko": "그저 친구나 동료로만 여겼던 사람에게서 뜻밖의 이성적인 매력을 느끼게 됩니다. 편견을 버리고 상대방의 새로운 면을 바라보세요.", "en": "You will feel unexpected romantic attraction from someone you considered just a friend or colleague. Discard your prejudices and look at the new side of the person." }
+  },
+  {
+    "id": 21,
+    "quote": { "ko": "건강을 위한 작은 실천이 큰 활력을 가져옵니다.", "en": "A small action for your health brings great vitality." },
+    "premiumDetail": { "ko": "평소보다 물을 많이 마시거나 10분만 일찍 잠자리에 들어보세요. 내일 아침 기상할 때의 상쾌함이 하루의 운세를 크게 상승시킵니다.", "en": "Drink more water than usual or go to bed just 10 minutes earlier. The freshness when you wake up tomorrow morning will greatly elevate your daily fortune." }
+  },
+  {
+    "id": 22,
+    "quote": { "ko": "뜻밖의 칭찬이 하루 종일 당신을 춤추게 할 것입니다.", "en": "An unexpected compliment will make you dance all day." },
+    "premiumDetail": { "ko": "당신이 크게 신경 쓰지 않았던 부분을 누군가 높이 평가해줍니다. 그 칭찬이 당신의 숨겨진 잠재력을 깨우는 트리거가 됩니다.", "en": "Someone highly appreciates a part you didn't pay much attention to. That compliment becomes a trigger to awaken your hidden potential." }
+  },
+  {
+    "id": 23,
+    "quote": { "ko": "오늘은 머뭇거리지 말고 과감하게 전진하세요.", "en": "Don't hesitate today and boldly move forward." },
+    "premiumDetail": { "ko": "망설이던 투자나 고백이 있다면 오늘이 바로 결단의 날입니다. 자신감을 가지고 행동하면 우주의 기운이 당신을 도울 것입니다.", "en": "If you've been hesitating on an investment or confession, today is the day to decide. Act with confidence and the energy of the universe will help you." }
+  },
+  {
+    "id": 24,
+    "quote": { "ko": "사소한 오해가 풀리고 평화가 찾아옵니다.", "en": "A minor misunderstanding is resolved and peace arrives." },
+    "premiumDetail": { "ko": "껄끄러웠던 관계가 우연한 계기로 부드러워집니다. 먼저 가볍게 인사를 건네거나 작은 간식을 나누면 관계 회복의 기적이 일어납니다.", "en": "An awkward relationship softens by chance. If you greet them lightly first or share a small snack, the miracle of relationship recovery will happen." }
+  }
+]

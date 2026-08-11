@@ -14,8 +14,12 @@ class AppTranslations extends Translations {
           'dark_mode_desc': '어두운 테마를 사용합니다',
           'light_mode': '라이트 모드',
           'light_mode_desc': '밝은 테마를 사용합니다',
-          'push_notification': '푸시 알림 수신',
-          'push_notification_desc': '새로운 소식을 받아봅니다',
+          'daily_notification': '데일리 운세 알림',
+          'daily_notification_desc': '매일 아침 9시 오늘의 운세 알림을 받습니다',
+          'bgm_sound': '배경음악 (BGM)',
+          'bgm_sound_desc': '신비로운 앰비언트 사운드 재생',
+          'sfx_sound': '효과음 (SFX)',
+          'sfx_sound_desc': '카드 및 쿠키 상호작용 효과음 재생',
           
           'support_info': '고객 지원 및 정보',
           'email_inquiry': '이메일 문의',
@@ -94,6 +98,40 @@ class AppTranslations extends Translations {
           'onboarding_desc_3': '다국어부터 수익화까지 완벽하게 준비된 템플릿입니다.',
           'onboarding_next_btn': '다음',
           'onboarding_start_btn': '시작하기',
+          
+          // Home Screen
+          'home_title': '별빛 운세',
+          'home_subtitle': '매일 당신을 기다리는 신비로운 이야기',
+          'home_fortune_title': '오늘의 포춘쿠키',
+          'home_fortune_desc': '달콤한 쿠키 속에 숨겨진 오늘의 행운',
+          'home_tarot_title': '신비의 타로 1장 뽑기',
+          'home_tarot_desc': '내면의 무의식이 선택한 카드는 무엇일까요?',
+          'home_test_title': '나의 수호 동물 심리테스트',
+          'home_test_desc': '나의 무의식을 지키는 수호 동물을 알아보세요',
+
+          // Fortune Screen
+          'fortune_screen_title': '오늘의 포춘쿠키',
+          'fortune_tap_desc': '포춘쿠키를 탭하여 오늘의 운세를 확인하세요!',
+          'fortune_message_title': '오늘의 메세지',
+          'fortune_premium_title': '상세 해석 (Premium)',
+          'fortune_premium_teaser': '당신의 운세에 숨겨진 엄청난 반전이 있습니다.\n지금 바로 구체적인 행운의 힌트를 확인하세요.',
+          'share_kakao_btn': '카카오톡으로 결과 공유하기',
+
+          // Tarot Screen
+          'tarot_screen_title': '신비의 타로 뽑기',
+          'tarot_instruction': '눈을 감고 고민을 떠올린 뒤\n카드를 선택하세요',
+          'tarot_result_title': '타로 결과',
+          'tarot_basic_meaning': '기본 해석',
+          'tarot_love_luck': '💕 연애운',
+          'tarot_wealth_luck': '💰 재물운',
+          'tarot_premium_teaser': '이 카드가 당신의 연애운과 재물운에\n미칠 엄청난 영향이 궁금하신가요?',
+
+          // Test Screen
+          'test_result_title': '테스트 결과',
+          'test_analysis_title': '성향 분석',
+          'test_match_title': '🤝 인간관계 & 궁합',
+          'test_premium_teaser': '당신과 최악의 상극인 성향은 무엇일까요?\n궁합과 인연에 대한 상세 보고서를 확인하세요.',
+          'share_friend_btn': '친구에게 공유하기',
         },
         'en_US': {
           'tab_home': 'Home',
@@ -106,8 +144,12 @@ class AppTranslations extends Translations {
           'dark_mode_desc': 'Use dark theme',
           'light_mode': 'Light Mode',
           'light_mode_desc': 'Use bright theme',
-          'push_notification': 'Push Notifications',
-          'push_notification_desc': 'Receive new updates',
+          'daily_notification': 'Daily Fortune Reminder',
+          'daily_notification_desc': 'Receive daily fortune reminder at 9 AM',
+          'bgm_sound': 'Background Music (BGM)',
+          'bgm_sound_desc': 'Play mysterious ambient sound',
+          'sfx_sound': 'Sound Effects (SFX)',
+          'sfx_sound_desc': 'Play card and cookie interaction sounds',
           
           'support_info': 'Support & Info',
           'email_inquiry': 'Email Inquiry',
@@ -186,6 +228,40 @@ class AppTranslations extends Translations {
           'onboarding_desc_3': 'Fully prepared template from I18n to monetization.',
           'onboarding_next_btn': 'Next',
           'onboarding_start_btn': 'Get Started',
+          
+          // Home Screen
+          'home_title': 'Starlight Fortune',
+          'home_subtitle': 'A mystical story waiting for you every day',
+          'home_fortune_title': "Today's Fortune Cookie",
+          'home_fortune_desc': "Today's luck hidden inside a sweet cookie",
+          'home_tarot_title': 'Draw a Mystical Tarot Card',
+          'home_tarot_desc': 'Which card will your inner unconscious choose?',
+          'home_test_title': 'My Spirit Animal Test',
+          'home_test_desc': 'Find out the spirit animal that guards your unconscious',
+
+          // Fortune Screen
+          'fortune_screen_title': "Today's Fortune Cookie",
+          'fortune_tap_desc': 'Tap the fortune cookie to check your daily fortune!',
+          'fortune_message_title': "Today's Message",
+          'fortune_premium_title': 'Detailed Interpretation (Premium)',
+          'fortune_premium_teaser': 'There is a huge twist hidden in your fortune.\nCheck the specific hint for your luck right now.',
+          'share_kakao_btn': 'Share result via KakaoTalk',
+
+          // Tarot Screen
+          'tarot_screen_title': 'Draw Mystical Tarot',
+          'tarot_instruction': 'Close your eyes, think of your worries,\nand pick a card',
+          'tarot_result_title': 'Tarot Result',
+          'tarot_basic_meaning': 'Basic Meaning',
+          'tarot_love_luck': '💕 Love Luck',
+          'tarot_wealth_luck': '💰 Wealth Luck',
+          'tarot_premium_teaser': 'Curious about the enormous impact this card will have\non your love and wealth luck?',
+
+          // Test Screen
+          'test_result_title': 'Test Result',
+          'test_analysis_title': 'Personality Analysis',
+          'test_match_title': '🤝 Relationship & Match',
+          'test_premium_teaser': 'What personality is the worst match for you?\nCheck out the detailed report on chemistry and connections.',
+          'share_friend_btn': 'Share with a friend',
         }
       };
 }
