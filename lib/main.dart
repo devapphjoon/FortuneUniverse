@@ -23,8 +23,17 @@ void main() async {
   AdManager.init(); // 애드몹 초기화 (await 제거하여 스플래시 멈춤 방지)
   
   // Initialize Services
-  await AudioService().init();
-  await NotificationService().init();
+  try {
+    await AudioService().init();
+  } catch (e) {
+    debugPrint('AudioService init failed: $e');
+  }
+  
+  try {
+    await NotificationService().init();
+  } catch (e) {
+    debugPrint('NotificationService init failed: $e');
+  }
   
   // Load saved language
   final prefs = await SharedPreferences.getInstance();

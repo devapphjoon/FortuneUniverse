@@ -75,8 +75,8 @@ class _TarotScreenState extends State<TarotScreen> with SingleTickerProviderStat
     } else {
       AdManager.showRewardedAd(
         showPrompt: true, // 광고 시청 의사를 묻는 다이얼로그 표시
-        customTitle: '오늘의 무료 횟수 소진 😢',
-        customMessage: '금일 무료 사용권이 모두 끝났습니다.\n광고를 시청하시면 한 번 더 타로 카드를 뽑으실 수 있습니다!',
+        customTitle: 'free_chances_empty_title'.tr,
+        customMessage: 'free_chances_empty_tarot'.tr,
         onUserEarnedReward: (reward) {
           _performFlipCard();
         },
@@ -102,7 +102,7 @@ class _TarotScreenState extends State<TarotScreen> with SingleTickerProviderStat
             Obx(() {
               final int left = _limitService.tarotDrawsLeft.value;
               return Text(
-                '오늘의 무료 횟수: $left / ${DailyLimitService.maxFreeDraws}',
+                'free_chances_left'.trParams({'left': left.toString()}),
                 style: const TextStyle(color: Colors.white70, fontSize: 16, fontWeight: FontWeight.bold),
               );
             }),
@@ -397,6 +397,7 @@ class _TarotResultScreenState extends State<TarotResultScreen> {
                   else
                     Container(
                       padding: const EdgeInsets.all(16),
+                      width: double.infinity,
                       decoration: BoxDecoration(
                         color: Colors.white.withOpacity(0.1),
                         borderRadius: BorderRadius.circular(12),
@@ -404,20 +405,12 @@ class _TarotResultScreenState extends State<TarotResultScreen> {
                       ),
                       child: Column(
                         children: [
+                          const Icon(Icons.lock_outline, color: Color(0xFFD4AF37), size: 32),
+                          const SizedBox(height: 8),
                           Text(
                             'tarot_premium_teaser'.tr,
                             textAlign: TextAlign.center,
                             style: const TextStyle(color: Colors.white70, fontSize: 14),
-                          ),
-                          const SizedBox(height: 12),
-                          ElevatedButton.icon(
-                            onPressed: _unlockPremium,
-                            icon: const Icon(Icons.play_circle_outline, color: Colors.white),
-                            label: Text('광고 보고 상세 해설 보기', style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: const Color(0xFF8B5CF6),
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
-                            ),
                           ),
                         ],
                       ),
@@ -427,12 +420,28 @@ class _TarotResultScreenState extends State<TarotResultScreen> {
               ),
             ),
             
+            if (!_isPremiumUnlocked) ...[
+              const SizedBox(height: 24),
+              ElevatedButton.icon(
+                onPressed: _unlockPremium,
+                icon: const Icon(Icons.play_circle_outline, color: Colors.white),
+                label: Text('ad_premium_tarot'.tr, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFF8B5CF6),
+                  padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+                  elevation: 10,
+                  shadowColor: const Color(0xFF8B5CF6).withOpacity(0.5),
+                ),
+              ),
+            ],
+            
             const SizedBox(height: 32),
             GlassButton(
-              text: 'SNS에 내 타로카드 공유하기',
+              text: 'share_tarot_sns'.tr,
               icon: Icons.share,
               onPressed: () {
-                ShareService.shareScreenshot(_screenshotController, '오늘의 타로 카드를 확인해 보세요! #별빛운세 #타로');
+                ShareService.shareScreenshot(_screenshotController, 'share_tarot_hashtag'.tr);
               },
             ),
           ],

@@ -112,16 +112,89 @@ class AdManager {
     String? customMessage,
   }) {
     if (showPrompt) {
-      Get.defaultDialog(
-        title: customTitle ?? '광고 시청',
-        middleText: customMessage ?? '동영상 광고를 시청하고 보상을 획득하시겠습니까?',
-        textConfirm: '시청하기',
-        textCancel: '취소',
-        confirmTextColor: Colors.white,
-        onConfirm: () {
-          Get.back(); // 팝업 닫기
-          _loadAndShowRewarded(onUserEarnedReward: onUserEarnedReward, onAdDismissed: onAdDismissed);
-        },
+      Get.dialog(
+        Dialog(
+          backgroundColor: Colors.transparent,
+          insetPadding: const EdgeInsets.symmetric(horizontal: 24),
+          child: Container(
+            padding: const EdgeInsets.all(24),
+            decoration: BoxDecoration(
+              color: const Color(0xFF1E1E2E), // 신비로운 다크 테마 배경
+              borderRadius: BorderRadius.circular(24),
+              border: Border.all(color: const Color(0xFF9D4EDD).withOpacity(0.5), width: 1.5),
+              boxShadow: [
+                BoxShadow(
+                  color: const Color(0xFF9D4EDD).withOpacity(0.3),
+                  blurRadius: 20,
+                  spreadRadius: 2,
+                ),
+              ],
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const Icon(Icons.stars_rounded, color: Color(0xFFE0AAFF), size: 56),
+                const SizedBox(height: 20),
+                Text(
+                  customTitle ?? 'ad_watch_title'.tr,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 22,
+                    fontWeight: FontWeight.w800,
+                    letterSpacing: 1.2,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 16),
+                Text(
+                  customMessage ?? 'ad_watch_desc'.tr,
+                  style: const TextStyle(
+                    color: Colors.white70,
+                    fontSize: 15,
+                    height: 1.6,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 32),
+                Row(
+                  children: [
+                    Expanded(
+                      child: TextButton(
+                        onPressed: () => Get.back(),
+                        style: TextButton.styleFrom(
+                          padding: const EdgeInsets.symmetric(vertical: 16),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(16),
+                          ),
+                        ),
+                        child: Text('ad_watch_cancel'.tr, style: const TextStyle(color: Colors.white60, fontSize: 16, fontWeight: FontWeight.bold)),
+                      ),
+                    ),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: ElevatedButton(
+                        onPressed: () {
+                          Get.back();
+                          _loadAndShowRewarded(onUserEarnedReward: onUserEarnedReward, onAdDismissed: onAdDismissed);
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: const Color(0xFF8B5CF6),
+                          padding: const EdgeInsets.symmetric(vertical: 16),
+                          elevation: 8,
+                          shadowColor: const Color(0xFF8B5CF6).withOpacity(0.5),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(16),
+                          ),
+                        ),
+                        child: Text('ad_watch_confirm'.tr, style: const TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold)),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
       );
     } else {
       _loadAndShowRewarded(onUserEarnedReward: onUserEarnedReward, onAdDismissed: onAdDismissed);
@@ -156,7 +229,7 @@ class AdManager {
         onAdFailedToLoad: (LoadAdError error) {
           Get.back(); // 로딩 닫기
           debugPrint('RewardedAd failed to load: $error');
-          Get.snackbar('알림', '현재 시청 가능한 광고가 없습니다. 잠시 후 다시 시도해주세요.');
+          Get.snackbar('alert'.tr, 'ad_no_ads_msg'.tr);
           if (onAdDismissed != null) onAdDismissed();
         },
       ),

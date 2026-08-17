@@ -1,12 +1,18 @@
 import 'dart:convert';
 import 'package:flutter/services.dart';
+import 'package:flutter/foundation.dart';
 
 class AppConfig {
   static late Map<String, dynamic> _config;
 
   static Future<void> load() async {
-    final configString = await rootBundle.loadString('assets/app_config.json');
-    _config = jsonDecode(configString);
+    try {
+      final configString = await rootBundle.loadString('assets/app_config.json');
+      _config = jsonDecode(configString);
+    } catch (e) {
+      debugPrint('Failed to load app_config.json: $e');
+      _config = {};
+    }
   }
 
   static String get appName => _config['appName'] ?? 'Unknown App';

@@ -1,0 +1,2 @@
+pw : android
+alias : upload 

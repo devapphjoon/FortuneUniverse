@@ -3,6 +3,7 @@ import 'package:timezone/data/latest_all.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class NotificationService {
   static final NotificationService _instance = NotificationService._internal();
@@ -10,7 +11,7 @@ class NotificationService {
   NotificationService._internal();
 
   final FlutterLocalNotificationsPlugin _flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
-  bool _isNotificationEnabled = false;
+  bool _isNotificationEnabled = true;
 
   bool get isNotificationEnabled => _isNotificationEnabled;
 
@@ -19,7 +20,7 @@ class NotificationService {
     // 한국 시간대 설정 (필요에 따라 변경)
     tz.setLocalLocation(tz.getLocation('Asia/Seoul'));
 
-    const AndroidInitializationSettings initializationSettingsAndroid = AndroidInitializationSettings('@mipmap/ic_launcher');
+    const AndroidInitializationSettings initializationSettingsAndroid = AndroidInitializationSettings('@mipmap/launcher_icon');
     const DarwinInitializationSettings initializationSettingsIOS = DarwinInitializationSettings(
       requestAlertPermission: false,
       requestBadgePermission: false,
@@ -35,7 +36,20 @@ class NotificationService {
     );
 
     final prefs = await SharedPreferences.getInstance();
-    _isNotificationEnabled = prefs.getBool('isNotificationEnabled') ?? false;
+    
+    // 알림 초기 기본값을 true로 설정
+    _isNotificationEnabled = prefs.getBool('isNotificationEnabled') ?? true;
+    final bool isFirstRun = prefs.getBool('isFirstRun_notification') ?? true;
+
+    // 첫 실행이면서 알림이 활성화되어 있다면 권한을 요청합니다.
+    if (isFirstRun && _isNotificationEnabled) {
+      final granted = await requestPermissions();
+      if (!granted) {
+        _isNotificationEnabled = false;
+        await prefs.setBool('isNotificationEnabled', false);
+      }
+      await prefs.setBool('isFirstRun_notification', false);
+    }
 
     if (_isNotificationEnabled) {
       await scheduleDailyNotification();
@@ -78,24 +92,28 @@ class NotificationService {
   }
 
   Future<void> scheduleDailyNotification() async {
-    await _flutterLocalNotificationsPlugin.zonedSchedule(
-        id: 0,
-        title: '오늘의 별빛 운세가 도착했어요! 🔮',
-        body: '지금 접속해서 당신만의 특별한 운세를 확인해보세요.',
-        scheduledDate: _nextInstanceOfNineAM(),
-        notificationDetails: const NotificationDetails(
-            android: AndroidNotificationDetails(
-                'daily_fortune_channel', 
-                '데일리 운세 알림',
-                channelDescription: '매일 아침 9시에 오늘의 운세를 알려줍니다.',
-                importance: Importance.max,
-                priority: Priority.high,
-            ),
-            iOS: DarwinNotificationDetails(),
-        ),
-        androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
-        matchDateTimeComponents: DateTimeComponents.time,
-    );
+    try {
+      await _flutterLocalNotificationsPlugin.zonedSchedule(
+          id: 0,
+          title: 'noti_fortune_title'.tr,
+          body: 'noti_fortune_body'.tr,
+          scheduledDate: _nextInstanceOfNineAM(),
+          notificationDetails: NotificationDetails(
+              android: AndroidNotificationDetails(
+                  'daily_fortune_channel_id', 
+                  'daily_notification'.tr,
+                  channelDescription: 'daily_notification_desc'.tr,
+                  importance: Importance.max,
+                  priority: Priority.high,
+              ),
+              iOS: DarwinNotificationDetails(),
+          ),
+          androidScheduleMode: AndroidScheduleMode.inexactAllowWhileIdle,
+          matchDateTimeComponents: DateTimeComponents.time,
+      );
+    } catch (e) {
+      print('Failed to schedule daily notification: $e');
+    }
   }
 
   tz.TZDateTime _nextInstanceOfNineAM() {

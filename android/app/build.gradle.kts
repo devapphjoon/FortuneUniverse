@@ -67,3 +67,12 @@ dependencies {
 flutter {
     source = "../.."
 }
+
+// Windows 드라이브 경로 불일치(C: 와 D:)로 인한 generateDebugUnitTestConfig 빌드 에러 우회용 코드
+gradle.taskGraph.whenReady {
+    tasks.forEach { task ->
+        if (task.name.contains("generateDebugUnitTestConfig") || task.name.contains("generateReleaseUnitTestConfig")) {
+            task.enabled = false
+        }
+    }
+}

@@ -134,8 +134,8 @@ class _FortuneCookieScreenState extends State<FortuneCookieScreen> with TickerPr
     } else {
       AdManager.showRewardedAd(
         showPrompt: true, // 광고 시청 의사를 묻는 다이얼로그 표시
-        customTitle: '오늘의 무료 횟수 소진 😢',
-        customMessage: '금일 무료 사용권이 모두 끝났습니다.\n광고를 시청하시면 한 번 더 운세를 확인하실 수 있습니다!',
+        customTitle: 'free_chances_empty_title'.tr,
+        customMessage: 'free_chances_empty_fortune'.tr,
         onUserEarnedReward: (reward) {
           _performOpenCookie();
         },
@@ -196,7 +196,7 @@ class _FortuneCookieScreenState extends State<FortuneCookieScreen> with TickerPr
         Obx(() {
           final int left = _limitService.fortuneDrawsLeft.value;
           return Text(
-            '오늘의 무료 횟수: $left / ${DailyLimitService.maxFreeDraws}',
+            'free_chances_left'.trParams({'left': left.toString()}),
             style: const TextStyle(color: Colors.white70, fontSize: 16, fontWeight: FontWeight.bold),
           );
         }),
@@ -279,7 +279,7 @@ class _FortuneCookieScreenState extends State<FortuneCookieScreen> with TickerPr
         ),
         const SizedBox(height: 40),
         Text(
-          _isBreaking ? '행운을 불러오는 중...' : (_isSplitting ? '쿠키가 열립니다!' : 'fortune_tap_desc'.tr),
+          _isBreaking ? 'fortune_calling'.tr : (_isSplitting ? 'fortune_splitting'.tr : 'fortune_tap_desc'.tr),
           style: TextStyle(
             color: (_isBreaking || _isSplitting) ? Colors.amber : Colors.white70, 
             fontSize: (_isBreaking || _isSplitting) ? 20 : 16,
@@ -371,6 +371,7 @@ class _FortuneCookieScreenState extends State<FortuneCookieScreen> with TickerPr
                 else
                   Container(
                     padding: const EdgeInsets.all(16),
+                    width: double.infinity,
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(12),
@@ -378,20 +379,12 @@ class _FortuneCookieScreenState extends State<FortuneCookieScreen> with TickerPr
                     ),
                     child: Column(
                       children: [
+                        const Icon(Icons.lock_outline, color: Color(0xFFD4AF37), size: 32),
+                        const SizedBox(height: 8),
                         Text(
                           'fortune_premium_teaser'.tr,
                           textAlign: TextAlign.center,
                           style: const TextStyle(color: Color(0xFF5D4037), fontSize: 14),
-                        ),
-                        const SizedBox(height: 12),
-                        ElevatedButton.icon(
-                          onPressed: _unlockPremium,
-                          icon: const Icon(Icons.play_circle_outline, color: Colors.white),
-                          label: Text('광고 보고 상세 팁 확인', style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color(0xFF8B5CF6),
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
-                          ),
                         ),
                       ],
                     ),
@@ -401,13 +394,29 @@ class _FortuneCookieScreenState extends State<FortuneCookieScreen> with TickerPr
           ),
           ),
           
+          if (!_isPremiumUnlocked) ...[
+            const SizedBox(height: 24),
+            ElevatedButton.icon(
+              onPressed: _unlockPremium,
+              icon: const Icon(Icons.play_circle_outline, color: Colors.white),
+              label: Text('ad_premium_fortune'.tr, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color(0xFF8B5CF6),
+                padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+                elevation: 10,
+                shadowColor: const Color(0xFF8B5CF6).withOpacity(0.5),
+              ),
+            ),
+          ],
+          
           const SizedBox(height: 32),
           // 공유 버튼
           GlassButton(
-            text: 'SNS에 내 운세 공유하기',
+            text: 'share_fortune_sns'.tr,
             icon: Icons.share,
             onPressed: () {
-              ShareService.shareScreenshot(_screenshotController, '내 포춘쿠키 결과를 확인해 보세요! #별빛운세 #포춘쿠키');
+              ShareService.shareScreenshot(_screenshotController, 'share_fortune_hashtag'.tr);
             },
           ),
         ],

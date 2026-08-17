@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:monetization_module/monetization_module.dart';
 import '../ui/glass_widgets.dart';
 import 'fortune_cookie_screen.dart';
@@ -82,7 +83,13 @@ class HomeScreen extends StatelessWidget {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text('home_fortune_title'.tr, style: const TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold)),
+                                  AutoSizeText(
+                                    'home_fortune_title'.tr, 
+                                    style: const TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
+                                    maxLines: 1,
+                                    minFontSize: 14,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
                                   const SizedBox(height: 8),
                                   Text('home_fortune_desc'.tr, style: TextStyle(color: Colors.white.withOpacity(0.7), fontSize: 13)),
                                 ],
@@ -102,7 +109,13 @@ class HomeScreen extends StatelessWidget {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text('home_tarot_title'.tr, style: const TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold)),
+                                  AutoSizeText(
+                                    'home_tarot_title'.tr, 
+                                    style: const TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
+                                    maxLines: 1,
+                                    minFontSize: 14,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
                                   const SizedBox(height: 8),
                                   Text('home_tarot_desc'.tr, style: TextStyle(color: Colors.white.withOpacity(0.7), fontSize: 13)),
                                 ],
@@ -122,7 +135,13 @@ class HomeScreen extends StatelessWidget {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text('home_test_title'.tr, style: const TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold)),
+                                  AutoSizeText(
+                                    'home_test_title'.tr, 
+                                    style: const TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
+                                    maxLines: 1,
+                                    minFontSize: 14,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
                                   const SizedBox(height: 8),
                                   Text('home_test_desc'.tr, style: TextStyle(color: Colors.white.withOpacity(0.7), fontSize: 13)),
                                 ],

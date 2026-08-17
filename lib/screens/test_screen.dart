@@ -199,12 +199,14 @@ class _TestResultScreenState extends State<TestResultScreen> {
                       boxShadow: [
                         BoxShadow(color: const Color(0xFF9D4EDD).withOpacity(0.2), blurRadius: 20, spreadRadius: 5),
                       ],
-                    ),
-                    child: const Center(
-                      child: Icon(
-                        Icons.auto_awesome, // 임시 아이콘 (나중에 Image.asset으로 변경)
-                        size: 80,
-                        color: Color(0xFFE0AAFF),
+                      image: DecorationImage(
+                        image: AssetImage(
+                          widget.result.id == 'A' ? 'assets/images/spirit_panther.jpg' :
+                          widget.result.id == 'B' ? 'assets/images/spirit_deer.jpg' :
+                          widget.result.id == 'C' ? 'assets/images/spirit_eagle.jpg' :
+                          'assets/images/spirit_cat.jpg'
+                        ),
+                        fit: BoxFit.cover,
                       ),
                     ),
                   ),
@@ -274,6 +276,7 @@ class _TestResultScreenState extends State<TestResultScreen> {
                   else
                     Container(
                       padding: const EdgeInsets.all(20),
+                      width: double.infinity,
                       decoration: BoxDecoration(
                         color: Colors.white.withOpacity(0.1),
                         borderRadius: BorderRadius.circular(16),
@@ -281,21 +284,12 @@ class _TestResultScreenState extends State<TestResultScreen> {
                       ),
                       child: Column(
                         children: [
+                          const Icon(Icons.lock_outline, color: Color(0xFFE0AAFF), size: 32),
+                          const SizedBox(height: 8),
                           Text(
                             'test_premium_teaser'.tr,
                             textAlign: TextAlign.center,
                             style: const TextStyle(color: Colors.white70, fontSize: 15),
-                          ),
-                          const SizedBox(height: 16),
-                          ElevatedButton.icon(
-                            onPressed: _unlockPremium,
-                            icon: const Icon(Icons.play_circle_outline, color: Colors.white),
-                            label: Text('광고 보고 찰떡 궁합 보기', style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: const Color(0xFF9D4EDD),
-                              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
-                            ),
                           ),
                         ],
                       ),
@@ -305,12 +299,28 @@ class _TestResultScreenState extends State<TestResultScreen> {
             ),
             ),
             
+            if (!_isPremiumUnlocked) ...[
+              const SizedBox(height: 24),
+              ElevatedButton.icon(
+                onPressed: _unlockPremium,
+                icon: const Icon(Icons.play_circle_outline, color: Colors.white),
+                label: Text('ad_premium_test'.tr, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFF9D4EDD),
+                  padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+                  elevation: 10,
+                  shadowColor: const Color(0xFF9D4EDD).withOpacity(0.5),
+                ),
+              ),
+            ],
+            
             const SizedBox(height: 32),
             GlassButton(
-              text: 'SNS에 내 수호동물 자랑하기',
+              text: 'share_test_sns'.tr,
               icon: Icons.share,
               onPressed: () {
-                ShareService.shareScreenshot(_screenshotController, '내 수호 동물을 확인해 보세요! #별빛운세 #심리테스트');
+                ShareService.shareScreenshot(_screenshotController, 'share_test_hashtag'.tr);
               },
             ),
           ],
