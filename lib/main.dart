@@ -11,45 +11,34 @@ import 'screens/home_screen.dart';
 import 'root_screen.dart';
 import 'screens/widgets/settings_features_card.dart';
 
-import 'core/services/audio_service.dart';
-import 'core/services/notification_service.dart';
-import 'services/daily_limit_service.dart';
-
-import 'package:shared_preferences/shared_preferences.dart';
+import 'core/error/global_error_handler.dart';
+import 'core/error/custom_error_widget.dart';
+import 'core/bootstrap/app_bootstrapper.dart';
+import 'core/bootstrap/fallback_app.dart';
 
 void main() async {
+  // 1. Flutter 엔진 바인딩
   WidgetsFlutterBinding.ensureInitialized();
-  await AppConfig.load();
-  AdManager.init(); // 애드몹 초기화 (await 제거하여 스플래시 멈춤 방지)
-  
-  // Initialize Services
-  try {
-    await AudioService().init();
-  } catch (e) {
-    debugPrint('AudioService init failed: $e');
+
+  // 2. 글로벌 에러 핸들러 세팅 (동기/비동기 에러 캐칭)
+  GlobalErrorHandler.init();
+
+  // 3. 에러 발생 시 커스텀 방어막 UI (회색 화면 방지)
+  setupCustomErrorWidget();
+
+  // 4. 통합 부트스트래퍼를 통한 모든 서비스 방폭 초기화
+  final bool isSuccess = await AppBootstrapper.initAll();
+
+  if (!isSuccess) {
+    // 핵심 환경 파일 등 로드 실패 시 강제 종료 대신 Fallback 미니앱 표출
+    runApp(const FallbackApp());
+    return;
   }
-  
-  try {
-    await NotificationService().init();
-  } catch (e) {
-    debugPrint('NotificationService init failed: $e');
-  }
-  
-  // Load saved language
-  final prefs = await SharedPreferences.getInstance();
-  final String? savedLang = prefs.getString('language_code');
-  final String? savedCountry = prefs.getString('country_code');
-  
-  Locale initialLocale;
-  if (savedLang != null && savedCountry != null) {
-    initialLocale = Locale(savedLang, savedCountry);
-  } else {
-    initialLocale = Get.deviceLocale ?? const Locale('en', 'US');
-  }
-  
-  // Initialize DailyLimitService
-  await Get.putAsync(() => DailyLimitService().init());
-  
+
+  // 5. 성공 시 사용자가 저장한 언어 설정 불러오기
+  final Locale initialLocale = await AppBootstrapper.loadSavedLocale();
+
+  // 6. 정상 구동
   runApp(AppFactory(initialLocale: initialLocale));
 }
 
