@@ -13,7 +13,7 @@ class AdManager {
   // 안드로이드/iOS 구글 공식 테스트 배너 ID
   static String get bannerAdUnitId {
     if (defaultTargetPlatform == TargetPlatform.android) {
-      return 'ca-app-pub-3940256099942544/6300978111';
+      return 'ca-app-pub-9430060268742842/7579030086';
     } else if (defaultTargetPlatform == TargetPlatform.iOS) {
       return 'ca-app-pub-3940256099942544/2934735716';
     }
@@ -33,7 +33,7 @@ class AdManager {
   // 안드로이드/iOS 구글 공식 테스트 보상형광고 ID
   static String get rewardedAdUnitId {
     if (defaultTargetPlatform == TargetPlatform.android) {
-      return 'ca-app-pub-3940256099942544/5224354917';
+      return 'ca-app-pub-9430060268742842/2659438996';
     } else if (defaultTargetPlatform == TargetPlatform.iOS) {
       return 'ca-app-pub-3940256099942544/1712485313';
     }
